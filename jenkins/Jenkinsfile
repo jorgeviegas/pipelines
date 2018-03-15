@@ -9,6 +9,7 @@ pipeline {
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
+    HYBRIS_ZIP = '../../binaries/hybris64.zip'
   }
 
   stages {
@@ -16,6 +17,7 @@ pipeline {
         steps {
           
           erasePlatform env.BINARIES_HOME
+          unzipPlatform env.BINARIES_HOME env.HYBRIS_ZIP
 
           //dir (env.HYBRIS_HOME) {
           //  sh '. ./setantenv.sh && ant envconfig'
