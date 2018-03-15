@@ -17,7 +17,7 @@ pipeline {
         steps {
           
           erasePlatform env.BINARIES_HOME
-          unzipPlatform env.BINARIES_HOME env.HYBRIS_ZIP
+          unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
 
           //dir (env.HYBRIS_HOME) {
           //  sh '. ./setantenv.sh && ant envconfig'
