@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-          echo 'build jo'
+        notifySlack 'estas feras bixo. Funcionou a pipeline', 'pipelines'
       }
     }
   }
