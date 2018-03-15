@@ -23,13 +23,16 @@ pipeline {
         //  sh '. ./setantenv.sh && ant envconfig'
         //}
 
-        timeout(time:5, unit:'DAYS') {
-          input message:'Approve deployment?', submitter: 'admin'
-        }
+        //timeout(time:5, unit:'DAYS') {
+        //  input message:'Approve deployment?', submitter: 'admin'
+       // }
       }
     }
     stage('Build') {
       steps {
+
+        antBuilds
+
         notifySlack 'estas feras bixo. Funcionou a pipeline', 'pipelines'
       }
     }
