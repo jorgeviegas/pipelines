@@ -3,6 +3,6 @@
 def call(String hybrisBinFolder = '', String hybrisBinZip = '') {
 	
 	dir (hybrisBinFolder){
-		unzip zipFile:hybrisBinZip, dir:, quiet:true
+		unzip zipFile:hybrisBinZip, quiet:true
 	}
 }
