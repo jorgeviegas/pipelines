@@ -1,13 +1,13 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(String platform = '', String hybrisHome = '') {
 
-    dir (env.PLATFORM_HOME) {
+    dir (platform) {
      	sh '. ./setantenv.sh'
      	sh 'ant clean'
     }
 
-    dir (env.HYBRIS_HOME) {
+    dir (hybrisHome) {
      	sh 'ant envconfig'
     }
 }

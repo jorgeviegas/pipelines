@@ -31,7 +31,7 @@ pipeline {
     stage('Build') {
       steps {
 
-        antBuilds
+        antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
 
         notifySlack 'estas feras bixo. Funcionou a pipeline', 'pipelines'
       }
