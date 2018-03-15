@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     PLATFORM_HOME = 'hybris/bin/platform'
+    BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
   }
 
@@ -14,7 +15,7 @@ pipeline {
       stage('Pull Request Checker') {
         steps {
           
-          helloWorld 'EROOO'
+          erasePlatform env.BINARIES_HOME
 
           //dir (env.HYBRIS_HOME) {
           //  sh '. ./setantenv.sh && ant envconfig'
