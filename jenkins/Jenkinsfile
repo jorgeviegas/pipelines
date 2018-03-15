@@ -1,0 +1,35 @@
+@Library('pipeline-library')_
+
+
+pipeline {
+
+  agent any
+
+  environment {
+    PLATFORM_HOME = 'hybris/bin/platform'
+    HYBRIS_HOME = 'hybris/'
+  }
+
+  stages {
+      stage('Pull Request Checker') {
+        steps {
+          
+          helloWorld 'EROOO'
+
+          //dir (env.HYBRIS_HOME) {
+          //  sh '. ./setantenv.sh && ant envconfig'
+          //}
+
+          timeout(time:5, unit:'DAYS') {
+            input message:'Approve deployment?', submitter: 'admin'
+          }
+
+          echo 'Hey test 123'
+          
+          // dir (env.PLATFORM_HOME) {
+           // sh '. ./setantenv.sh && ant clean all'
+         // }
+        }
+    }
+  }
+}
