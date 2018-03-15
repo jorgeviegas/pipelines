@@ -13,26 +13,25 @@ pipeline {
   }
 
   stages {
-      stage('Pull Request Checker') {
-        steps {
-          
-          erasePlatform env.BINARIES_HOME
-          unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+    stage('Erase Platform') {
+      steps {
+      
+        erasePlatform env.BINARIES_HOME
+        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
 
-          //dir (env.HYBRIS_HOME) {
-          //  sh '. ./setantenv.sh && ant envconfig'
-          //}
+        //dir (env.HYBRIS_HOME) {
+        //  sh '. ./setantenv.sh && ant envconfig'
+        //}
 
-          timeout(time:5, unit:'DAYS') {
-            input message:'Approve deployment?', submitter: 'admin'
-          }
-
-          echo 'Hey test 123'
-          
-          // dir (env.PLATFORM_HOME) {
-           // sh '. ./setantenv.sh && ant clean all'
-         // }
+        timeout(time:5, unit:'DAYS') {
+          input message:'Approve deployment?', submitter: 'admin'
         }
+      }
+    }
+    stage('Build') {
+      steps {
+          
+      }
     }
   }
 }
