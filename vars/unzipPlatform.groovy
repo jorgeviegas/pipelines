@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 
-def call(String hybrisBinFolder = '', String hybrisBinZipFolder = '') {
+def call(String hybrisBinFolder = '', String hybrisBinZip = '') {
 	
 	dir (hybrisBinFolder){
-		unzip hybrisBinZipFolder
+		unzip zipfile: hybrisBinZip, quiet:true
 	}
 }
