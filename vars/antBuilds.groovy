@@ -2,16 +2,14 @@
 
 def call(String platform = '', String hybrisHome = '') {
 
-    dir (platform) {
-     	sh '. ./setantenv.sh'
-    }
-
-      dir (platform) {
-     	sh 'ant clean'
-    }
+   withAnt('hybris-ant'){
+    	dir (platform) {
+    		sh 'pwd'
+     		sh 'ant clean'
+    	}
+	}
 
     dir (hybrisHome) {
-    	sh 'pwd'
      	sh 'ant envconfig'
     }
 }
