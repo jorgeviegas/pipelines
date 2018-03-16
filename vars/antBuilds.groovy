@@ -20,7 +20,7 @@ def call(String platform = '', String hybrisHome = '') {
     			sh 'ant reinstall_addons -Dtarget.storefront=athenasstorefront'	
     		}
     		catch(exc) {
-    			echo 'Error during reinstall_addons. Maybe you dont have addons to install?'
+    			echo 'Error during reinstall_addons. Maybe you dont have any addons to install?'
     		}   		
 			
      		sh 'ant all'
