@@ -16,7 +16,7 @@ pipeline {
     stage('Erase Platform') {
       steps {
 
-        echo 'tmp'
+        echo "Branch: ${env.BRANCH_NAME}"
     
      //   erasePlatform env.BINARIES_HOME
       //  unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
