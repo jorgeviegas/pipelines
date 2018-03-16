@@ -4,6 +4,9 @@ def call(String platform = '', String hybrisHome = '') {
 
     dir (platform) {
      	sh '. ./setantenv.sh'
+    }
+
+      dir (platform) {
      	sh 'ant clean'
     }
 

@@ -33,7 +33,7 @@ pipeline {
 
         antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
 
-        notifySlack 'estas feras bixo. Funcionou a pipeline', 'pipelines'
+        notifySlack 'Hybris is up and running!', 'pipelines'
       }
     }
   }
