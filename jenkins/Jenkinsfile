@@ -18,8 +18,8 @@ pipeline {
 
         echo "Branch: ${env.BRANCH_NAME} "
     
-     //   erasePlatform env.BINARIES_HOME
-      //  unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+        erasePlatform env.BINARIES_HOME
+        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
 
         //dir (env.HYBRIS_HOME) {
         //  sh '. ./setantenv.sh && ant envconfig'
