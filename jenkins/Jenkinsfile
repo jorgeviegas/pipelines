@@ -15,9 +15,11 @@ pipeline {
   stages {
     stage('Erase Platform') {
       steps {
+
+        echo 'lo'
       
-        erasePlatform env.BINARIES_HOME
-        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+     //   erasePlatform env.BINARIES_HOME
+      //  unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
 
         //dir (env.HYBRIS_HOME) {
         //  sh '. ./setantenv.sh && ant envconfig'

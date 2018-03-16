@@ -2,7 +2,7 @@
 
 def call(String platform = '', String hybrisHome = '') {
 
-   withAnt('hybris-ant'){
+   withAnt(installation: 'hybris-ant'){
     	dir (platform) {
     		sh 'pwd'
      		sh 'ant clean'
