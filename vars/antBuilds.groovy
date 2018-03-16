@@ -15,7 +15,14 @@ def call(String platform = '', String hybrisHome = '') {
 
    		dir (platform) {
     		sh 'ant customize'
-			sh 'ant reinstall_addons -Dtarget.storefront=athenasstorefront'
+
+    		try {
+    			sh 'ant reinstall_addons -Dtarget.storefront=athenasstorefront'	
+    		}
+    		catch(exc) {
+    			echo 'Error during reinstall_addons. Maybe you dont have addons to install?'
+    		}   		
+			
      		sh 'ant all'
     	}
 	}  
