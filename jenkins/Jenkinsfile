@@ -35,7 +35,7 @@ pipeline {
 
         antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
 
-        notifySlack 'Hybris is up and running! Branch deployed: ${env.BRANCH_NAME}', 'pipelines'
+        notifySlack "Hybris is up and running! Branch deployed: ${env.BRANCH_NAME}", 'pipelines'
       }
     }
   }
