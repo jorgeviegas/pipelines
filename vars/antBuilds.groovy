@@ -10,9 +10,13 @@ def call(String platform = '', String hybrisHome = '') {
 
     	 dir (hybrisHome) {
      		sh 'ant envconfig'
-     		sh 'ant customize'
+     		
+   		}
+
+   		dir (platform) {
+    		sh 'ant customize'
 			sh 'ant reinstal_addons'
      		sh 'ant all'
-   		}
+    	}
 	}  
 }
