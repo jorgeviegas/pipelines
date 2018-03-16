@@ -15,7 +15,7 @@ def call(String platform = '', String hybrisHome = '') {
 
    		dir (platform) {
     		sh 'ant customize'
-			sh 'ant reinstal_addons'
+			sh 'ant reinstall_addons'
      		sh 'ant all'
     	}
 	}  
