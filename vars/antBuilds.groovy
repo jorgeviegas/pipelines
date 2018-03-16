@@ -11,6 +11,7 @@ def call(String platform = '', String hybrisHome = '') {
     }
 
     dir (hybrisHome) {
+    	sh 'pwd'
      	sh 'ant envconfig'
     }
 }
