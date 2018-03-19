@@ -10,7 +10,7 @@ pipeline {
     }
 
   environment {
-    ERASE_PALTFORM_STEP = true
+    ERASE_PLATFORM_STEP = true
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
@@ -21,13 +21,15 @@ pipeline {
     stage('Erase Platform') {
       steps {
 
-        echo "Branch: ${env.BRANCH_NAME} "
-    
-        if (env.ERASE_PALTFORM_STEP) 
-        {
-          erasePlatform env.BINARIES_HOME
-          unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+        when {
+          beforeAgent true
+          environment name: 'ERASE_PLATFORM_STEP', value: true
         }
+
+        echo "Branch: ${env.BRANCH_NAME} "
+          
+        erasePlatform env.BINARIES_HOME
+        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
       }
     }
     stage('Build') {
