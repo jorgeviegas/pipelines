@@ -19,12 +19,11 @@ pipeline {
 
   stages {
     stage('Erase Platform') {
-      steps {
-
-        when {
+      when {
           beforeAgent true
           environment name: 'ERASE_PLATFORM_STEP', value: 'true'
-        }
+      }
+      steps {   
 
         echo "Branch: ${env.BRANCH_NAME} "
           
