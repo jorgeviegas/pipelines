@@ -23,7 +23,7 @@ pipeline {
 
         echo "Branch: ${env.BRANCH_NAME} "
     
-        if (ERASE_PALTFORM_STEP) 
+        if (env.ERASE_PALTFORM_STEP) 
         {
           erasePlatform env.BINARIES_HOME
           unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
