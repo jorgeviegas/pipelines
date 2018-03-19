@@ -23,7 +23,7 @@ pipeline {
 
         when {
           beforeAgent true
-          environment name: 'ERASE_PLATFORM_STEP', value: true
+          environment name: 'ERASE_PLATFORM_STEP', value: 'true'
         }
 
         echo "Branch: ${env.BRANCH_NAME} "
