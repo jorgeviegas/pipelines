@@ -5,7 +5,12 @@ pipeline {
 
   agent any
 
+    triggers {
+        cron('H H/1 * * 1-5')
+    }
+
   environment {
+    ERASE_PALTFORM_STEP = true
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
@@ -18,16 +23,11 @@ pipeline {
 
         echo "Branch: ${env.BRANCH_NAME} "
     
-        erasePlatform env.BINARIES_HOME
-        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
-
-        //dir (env.HYBRIS_HOME) {
-        //  sh '. ./setantenv.sh && ant envconfig'
-        //}
-
-        //timeout(time:5, unit:'DAYS') {
-        //  input message:'Approve deployment?', submitter: 'admin'
-       // }
+        if (ERASE_PALTFORM_STEP) 
+        {
+          erasePlatform env.BINARIES_HOME
+          unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+        }
       }
     }
     stage('Build') {
