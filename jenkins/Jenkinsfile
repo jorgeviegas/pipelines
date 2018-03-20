@@ -14,6 +14,7 @@ pipeline {
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
+    JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
   }
 
@@ -31,12 +32,25 @@ pipeline {
         unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
       }
     }
+    
+    stage('Checkout code from SCM') {
+      steps {   
+        checkout scm
+      }
+    }
+
     stage('Build') {
       steps {
 
         antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
 
         notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT}", 'pipelines'
+      }
+    }
+
+    stage('Run Tests') {
+      steps {   
+        runTests env.PLATFORM_HOME, env.JUNIT_RESULT
       }
     }
   }
