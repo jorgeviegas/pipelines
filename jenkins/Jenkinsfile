@@ -1,33 +1,42 @@
 @Library('pipeline-library')_
 
-
 pipeline {
 
   agent any
 
-    triggers {
-        cron('H H/1 * * 1-5')
-    }
-
   environment {
-    ERASE_PLATFORM_STEP = false
+    RUN_RESET_PLATFORM_STEP = false
+    RUN_TESTS_STEP = false
+    RUN_NOTIFY_STEP = false
+    RUN_SONAR_STEP = false
+
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
+
     JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
   }
 
   stages {
-    stage('Erase Platform') {
+    stage('Log Info') {
+      steps {           
+          echo "Branch: ${env.BRANCH_NAME} "
+          echo "Commit: ${env.GIT_COMMIT} "
+          echo "###### Steps Config ######"
+          echo "RUN_RESET_PLATFORM_STEP: ${env.RUN_RESET_PLATFORM_STEP} "
+          echo "RUN_TESTS_STEP: ${env.RUN_TESTS_STEP} "
+          echo "RUN_NOTIFY_STEP: ${env.RUN_NOTIFY_STEP} "
+          echo "RUN_SONAR_STEP: ${env.RUN_SONAR_STEP} "
+      }
+    }
+
+    stage('Reset Platform') {
       when {
           beforeAgent true
-          environment name: 'ERASE_PLATFORM_STEP', value: 'true'
+          environment name: 'RUN_RESET_PLATFORM_STEP', value: 'true'
       }
-      steps {   
-
-        echo "Branch: ${env.BRANCH_NAME} "
-          
+      steps {           
         erasePlatform env.BINARIES_HOME
         unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
       }
@@ -41,16 +50,41 @@ pipeline {
 
     stage('Build') {
       steps {
-
         antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
-
-        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT}", 'pipelines'
       }
     }
 
     stage('Run Tests') {
+      when {
+          beforeAgent true
+          environment name: 'RUN_TESTS_STEP', value: 'true'
+      }
       steps {   
         runTests env.PLATFORM_HOME, env.JUNIT_RESULT
+      }
+    }
+
+    stage('SonarQube') {
+      when {
+          beforeAgent true
+          environment name: 'RUN_SONAR_STEP', value: 'true'
+      }
+      steps {   
+        def scannerHome = tool 'SonarQube';
+        withSonarQubeEnv('SonarQube') {
+          sh "ls -al"
+          sh "${scannerHome}/bin/sonar-scanner -Djavax.net.debug=all -Djavax.net.debug=ssl:handshake -Dproject.settings=./sonar.properties"
+        }   
+      }
+    }
+
+    stage('Notify') {
+      when {
+          beforeAgent true
+          environment name: 'RUN_NOTIFY_STEP', value: 'true'
+      }
+      steps {   
+        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT}", 'pipelines'
       }
     }
   }
