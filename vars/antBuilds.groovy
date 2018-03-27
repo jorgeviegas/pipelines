@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(String platform = '', String hybrisHome = '') {
+def call(String platform = '', String hybrisHome = '', String environmentName = '') {
 
    withAnt(installation: 'hybris-ant'){
     	dir (platform) {
@@ -9,7 +9,7 @@ def call(String platform = '', String hybrisHome = '') {
     	}
 
     	 dir (hybrisHome) {
-     		sh 'ant envconfig'
+     		sh 'ant envconfig environmentName'
      		
    		}
 

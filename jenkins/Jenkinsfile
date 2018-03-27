@@ -16,6 +16,7 @@ pipeline {
 
     JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
+    ENVIRONMENT_NAME = 'local'
   }
 
   stages {
@@ -50,7 +51,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME
+        antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME, env.ENVIRONMENT_NAME
       }
     }
 
