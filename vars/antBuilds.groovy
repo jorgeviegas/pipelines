@@ -8,8 +8,10 @@ def call(String platform = '', String hybrisHome = '', String environmentName = 
      		sh 'ant clean'
     	}
 
+        echo env.PLATFORM_HOME
+
     	 dir (hybrisHome) {
-     		sh 'ant envconfig ${environmentName}'
+     		sh "ant envconfig ${environmentName}'"
      		
    		}
 
