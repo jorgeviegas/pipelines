@@ -18,7 +18,7 @@ pipeline {
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
     ENVIRONMENT_NAME = 'local'
 
-    SCANNER_HOME = tool 'SonarQube';
+    //SCANNER_HOME = tool 'SonarQube';
   }
 
   stages {
