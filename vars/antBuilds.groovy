@@ -9,7 +9,7 @@ def call(String platform = '', String hybrisHome = '', String environmentName = 
     	}
 
     	 dir (hybrisHome) {
-     		sh 'ant envconfig environmentName'
+     		sh 'ant envconfig ${environmentName}'
      		
    		}
 
