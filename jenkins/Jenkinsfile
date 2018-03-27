@@ -17,6 +17,8 @@ pipeline {
     JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
     ENVIRONMENT_NAME = 'local'
+
+    SCANNER_HOME = tool 'SonarQube';
   }
 
   stages {
@@ -82,9 +84,8 @@ pipeline {
       }
       steps {   
         withSonarQubeEnv('SonarQube') {
-          def scannerHome = tool 'SonarQube';
           sh "ls -al"
-          sh "${scannerHome}/bin/sonar-scanner -Djavax.net.debug=all -Djavax.net.debug=ssl:handshake -Dproject.settings=./sonar.properties"
+          sh "${env.SCANNER_HOME}/bin/sonar-scanner -Djavax.net.debug=all -Djavax.net.debug=ssl:handshake -Dproject.settings=./sonar.properties"
         }   
       }
     }
