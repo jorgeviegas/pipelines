@@ -16,7 +16,7 @@ def call(boolean hcsStructure = false) {
         }
 
         dir (env.HYBRIS_HOME) {
-            sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME} -f ${env.HYBRIS_HOME}/build.xml"
+            sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
         }
 
         dir (env.PLATFORM_HOME) {
