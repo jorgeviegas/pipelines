@@ -9,7 +9,7 @@ def call(boolean hcsStructure = false) {
         }
 
         dir (env.HYBRIS_HOME) {
-            sh "rm -rf ${env.HCS_PACKAGES_FOLDER}*"
+            sh "rm -rf ${env.HCS_PACKAGES_FOLDER}/*"
         }
 
         dir (env.PLATFORM_HOME) {
@@ -22,7 +22,14 @@ def call(boolean hcsStructure = false) {
    		}
 
         dir (env.HYBRIS_HOME) {
-            sh "cp config/localextensions.xml '${env.HCS_PACKAGES_FOLDER}'"
+            sh "cp temp/hybris/hybrisServer/hybrisServer-AllExtensions"
+        }
+
+        dir (env.HYBRIS_HOME) {
+            sh 'rm -rf temp_hcs_package'
+            sh 'mkdir temp_hcs_package'
+
+            unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package' quiet:true
         }
 
 
