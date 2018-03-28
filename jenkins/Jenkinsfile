@@ -9,6 +9,7 @@ pipeline {
     RUN_TESTS_STEP = false
     RUN_NOTIFY_STEP = false
     RUN_SONAR_STEP = false
+    RUN_PACKAGING = false
 
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
