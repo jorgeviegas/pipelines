@@ -8,6 +8,10 @@ def call(boolean hcsStructure = false) {
             sh 'rm -rf config'
         }
 
+        dir (env.HYBRIS_HOME) {
+            sh "rm -rf ${env.HCS_PACKAGES_FOLDER}/*"
+        }
+
         dir (env.PLATFORM_HOME) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
      		sh 'ant clean -Dinput.template=develop'

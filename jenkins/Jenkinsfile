@@ -11,10 +11,11 @@ pipeline {
     RUN_SONAR_STEP           = false
     RUN_PRODUCTION_PACKAGING = true
     HCS_PACKAGING            = false
- 
- 
+
+    BUILD_MODE               = 'pr-builder'
+  
     STOREFRONT_NAME          = 'athenasstorefront'
-    PROJECT_PACKAGE          = 'com.sap.'
+    PROJECT_PACKAGE          = 'com.sap.cd.b2bmvp'
     ENVIRONMENT_NAME         = 'local'
  
     PLATFORM_HOME            = 'hybris/bin/platform'
@@ -23,7 +24,8 @@ pipeline {
     ANT_INSTALATION          = 'hybris-ant'
     HCS_PACKAGES_FOLDER      = '/Users/i848340/hcs_packages/'
 
- 
+    SLACK_CHANNEL            = 'pipelines'
+
     JUNIT_RESULT             = 'hybris/log/junit/TESTS-TestSuites.xml'
      
     //TODO 
@@ -37,11 +39,7 @@ pipeline {
       steps {           
           echo "Branch: ${env.BRANCH_NAME} "
           echo "Commit: ${env.GIT_COMMIT} "
-          echo "###### Steps Config ######"
-          echo "RUN_RESET_PLATFORM_STEP: ${env.RUN_RESET_PLATFORM_STEP} "
-          echo "RUN_TESTS_STEP: ${env.RUN_TESTS_STEP} "
-          echo "RUN_NOTIFY_STEP: ${env.RUN_NOTIFY_STEP} "
-          echo "RUN_SONAR_STEP: ${env.RUN_SONAR_STEP} "
+          echo "Build mode: ${env.BUILD_MODE}"
       }
     }
 
