@@ -25,7 +25,7 @@ def call(boolean hcsStructure = false) {
             sh 'rm -rf temp_hcs_package'
             sh 'mkdir temp_hcs_package'
 
-            unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package' quiet:true
+            unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package', quiet:true
         }
 	}  
 }
