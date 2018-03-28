@@ -9,7 +9,7 @@ def call() {
     	}
 
     	 dir (env.HYBRIS_HOME) {
-     		sh "ant envconfig ${env.ENVIRONMENT_NAME}"
+     		sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
      		
    		}
 
