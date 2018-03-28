@@ -19,11 +19,13 @@ def call(boolean hcsStructure = false) {
 
     	dir (env.HYBRIS_HOME) {
      		sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
-    
+     
             sh 'rm -rf temp_hcs_package'
             sh 'mkdir temp_hcs_package'
 
             unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package', quiet:true
+
+            sh "cp temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip temp_hcs_package/hybris/bin"
         }
 	}  
 }
