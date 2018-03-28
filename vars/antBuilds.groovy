@@ -17,7 +17,7 @@ def call() {
     		sh 'ant customize'
 
     		try {
-    			sh 'ant reinstall_addons -Dtarget.storefront=${env.STOREFRONT_NAME}'	
+    			sh "ant reinstall_addons -Dtarget.storefront=${env.STOREFRONT_NAME}"
     		}
     		catch(exc) {
     			echo 'Error during reinstall_addons. Maybe you dont have any addons to install?'
