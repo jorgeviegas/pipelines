@@ -6,20 +6,20 @@ pipeline {
 
   environment {
     RUN_RESET_PLATFORM_STEP = false
-    RUN_TESTS_STEP = false
-    RUN_NOTIFY_STEP = false
-    RUN_SONAR_STEP = false
-    RUN_PACKAGING = false
+    RUN_TESTS_STEP          = true
+    RUN_NOTIFY_STEP         = true
+    RUN_SONAR_STEP          = false
+    RUN_PACKAGING           = false
 
-    PLATFORM_HOME = 'hybris/bin/platform'
-    BINARIES_HOME = 'hybris/bin/'
-    HYBRIS_HOME = 'hybris/'
-    STOREFRONT_NAME = 'athenasstorefront'
-    ANT_INSTALATION = 'hybris-ant'
+    PLATFORM_HOME           = 'hybris/bin/platform'
+    BINARIES_HOME           = 'hybris/bin/'
+    HYBRIS_HOME             = 'hybris/'
+    STOREFRONT_NAME         = 'athenasstorefront'
+    ANT_INSTALATION         = 'hybris-ant'
 
-    JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
-    HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
-    ENVIRONMENT_NAME = 'local'
+    JUNIT_RESULT            = 'hybris/log/junit/TESTS-TestSuites.xml'
+    HYBRIS_ZIP              = '../../../../binaries/hybris64.zip'
+    ENVIRONMENT_NAME        = 'local'
 
     //SCANNER_HOME = tool 'SonarQube';
   }
@@ -43,8 +43,8 @@ pipeline {
           environment name: 'RUN_RESET_PLATFORM_STEP', value: 'true'
       }
       steps {           
-        erasePlatform
-        unzipPlatform 
+        erasePlatform()
+        unzipPlatform() 
       }
     }
     
@@ -56,7 +56,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        antBuilds
+        antBuilds()
       }
     }
 
@@ -66,7 +66,7 @@ pipeline {
           environment name: 'RUN_PACKAGING', value: 'true'
       }
       steps {   
-          generatePackage
+        generatePackage()
       }
     }
 
