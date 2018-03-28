@@ -19,9 +19,7 @@ def call(boolean hcsStructure = false) {
 
     	dir (env.HYBRIS_HOME) {
      		sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
-
-            sh "cp temp/hybris/hybrisServer/hybrisServer-AllExtensions"
-      
+    
             sh 'rm -rf temp_hcs_package'
             sh 'mkdir temp_hcs_package'
 
