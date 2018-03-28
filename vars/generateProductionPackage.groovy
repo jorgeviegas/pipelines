@@ -9,7 +9,7 @@ def call(boolean hcsStructure = false) {
         }
 
         dir (env.HYBRIS_HOME) {
-            sh "rm -rf ${env.HCS_PACKAGES_FOLDER}/*"
+            sh "rm -rf ${env.HCS_PACKAGES_FOLDER}*"
         }
 
         dir (env.PLATFORM_HOME) {
