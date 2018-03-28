@@ -14,7 +14,7 @@ pipeline {
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
-    HCS_PACKAGE_SKELETON     = "${workspace}/jenkins/hcs_package_skeleton"
+    HCS_PACKAGE_SKELETON     = "${workspace}/jenkins/hcs_package_skeleton.zip"
 
     BUILD_MODE               = 'pr-builder'
   

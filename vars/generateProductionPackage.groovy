@@ -14,11 +14,27 @@ def call(boolean hcsStructure = false) {
 
         dir (env.PLATFORM_HOME) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
+
      		sh 'ant clean -Dinput.template=develop'
+
+            sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME} -f ${env.HYBRIS_HOME}/build.xml"
+
+            sh "ant customize"
+            
+            try {
+                sh 'ant reinstall_addons -Dtarget.storefront=${env.STOREFRONT_NAME}'    
+            }
+            catch(exc) {
+                echo 'Error during reinstall_addons. Maybe you dont have any addons to install?'
+            }  
+
+            sh "ant production"
+
     	}
 
+
+
     	dir (env.HYBRIS_HOME) {
-     		sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
      
             sh 'rm -rf temp_hcs_package'
             sh 'mkdir temp_hcs_package'
