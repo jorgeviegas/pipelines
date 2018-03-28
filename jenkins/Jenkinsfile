@@ -24,7 +24,7 @@ pipeline {
  
     PLATFORM_HOME            = 'hybris/bin/platform'
     BINARIES_HOME            = 'hybris/bin/'
-    HYBRIS_HOME              = 'hybris'
+    HYBRIS_HOME              = '${workspace}/hybris'
     ANT_INSTALATION          = 'hybris-ant'
     HCS_PACKAGES_FOLDER      = '/Users/i848340/hcs_packages'
 
