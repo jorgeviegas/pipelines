@@ -76,7 +76,7 @@ pipeline {
           environment name: 'RUN_TESTS_STEP', value: 'true'
       }
       steps {   
-        runTests
+        runTests()
       }
     }
 
