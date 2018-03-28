@@ -19,32 +19,13 @@ def call(boolean hcsStructure = false) {
 
     	dir (env.HYBRIS_HOME) {
      		sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME}"
-   		}
 
-        dir (env.HYBRIS_HOME) {
             sh "cp temp/hybris/hybrisServer/hybrisServer-AllExtensions"
-        }
-
-        dir (env.HYBRIS_HOME) {
+      
             sh 'rm -rf temp_hcs_package'
             sh 'mkdir temp_hcs_package'
 
             unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package' quiet:true
         }
-
-
- //       ant clean all customize reinstall_addons production
-   	//	dir (env.PLATFORM_HOME) {
-  //  		sh 'ant customize'
-//
-    	//	try {
-    	//		sh 'ant reinstall_addons -Dtarget.storefront=${env.STOREFRONT_NAME}'	
-    	//	}
-    	//	catch(exc) {
-    	//		echo 'Error during reinstall_addons. Maybe you dont have any addons to install?'
-    	//	}   		
-			
-     	//	sh 'ant all'
-    	//}
 	}  
 }
