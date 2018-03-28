@@ -6,9 +6,6 @@ def call(boolean hcsStructure = false) {
 
         dir (env.HYBRIS_HOME) {
             sh 'rm -rf config'
-        }
-
-        dir (env.HYBRIS_HOME) {
             sh "rm -rf ${env.HCS_PACKAGES_FOLDER}/*"
         }
 
@@ -16,8 +13,13 @@ def call(boolean hcsStructure = false) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
 
      		sh 'ant clean -Dinput.template=develop'
+        }
 
+        dir (env.HYBRIS_HOME) {
             sh "ant envconfig -Denvironment=${env.ENVIRONMENT_NAME} -f ${env.HYBRIS_HOME}/build.xml"
+        }
+
+        dir (env.PLATFORM_HOME) {
 
             sh "ant customize"
             
@@ -31,7 +33,6 @@ def call(boolean hcsStructure = false) {
             sh "ant production"
 
     	}
-
 
 
     	dir (env.HYBRIS_HOME) {
