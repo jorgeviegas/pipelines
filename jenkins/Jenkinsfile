@@ -13,6 +13,8 @@ pipeline {
     PLATFORM_HOME = 'hybris/bin/platform'
     BINARIES_HOME = 'hybris/bin/'
     HYBRIS_HOME = 'hybris/'
+    STOREFRONT_NAME = 'athenasstorefront'
+    ANT_INSTALATION = 'hybris-ant'
 
     JUNIT_RESULT = 'hybris/log/junit/TESTS-TestSuites.xml'
     HYBRIS_ZIP = '../../../../binaries/hybris64.zip'
@@ -40,8 +42,8 @@ pipeline {
           environment name: 'RUN_RESET_PLATFORM_STEP', value: 'true'
       }
       steps {           
-        erasePlatform env.BINARIES_HOME
-        unzipPlatform env.BINARIES_HOME,env.HYBRIS_ZIP
+        erasePlatform
+        unzipPlatform 
       }
     }
     
@@ -53,7 +55,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        antBuilds env.PLATFORM_HOME, env.HYBRIS_HOME, env.ENVIRONMENT_NAME
+        antBuilds
       }
     }
 
@@ -63,7 +65,7 @@ pipeline {
           environment name: 'RUN_PACKAGING', value: 'true'
       }
       steps {   
-          generatePackage env.PLATFORM_HOME, env.HYBRIS_HOME
+          generatePackage
       }
     }
 
@@ -73,7 +75,7 @@ pipeline {
           environment name: 'RUN_TESTS_STEP', value: 'true'
       }
       steps {   
-        runTests env.PLATFORM_HOME, env.JUNIT_RESULT
+        runTests
       }
     }
 

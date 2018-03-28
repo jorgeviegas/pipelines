@@ -1,12 +1,11 @@
 #!/usr/bin/env groovy
 
-def call(String platform = '', String junitResult = '/log/junit/TESTS-TestSuites.xml') {
-
-   withAnt(installation: 'hybris-ant'){
-    	dir (platform) {		
+def call() {
+   withAnt(installation: env.ANT_INSTALATION){
+    	dir (env.PLATFORM_HOME) {		
      		sh "ant unittests"
     	}
 	
-        junit "${junitResult}"
+        junit "${env.JUNIT_RESULT}"
     }  
 }
