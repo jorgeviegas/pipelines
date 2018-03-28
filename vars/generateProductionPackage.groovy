@@ -18,7 +18,7 @@ def call(boolean hcsStructure = false) {
    		}
 
         dir (env.HYBRIS_HOME) {
-            sh 'cp config/localextensions.xml ${env.HCS_PACKAGES_FOLDER}'
+            sh "cp config/localextensions.xml '${env.HCS_PACKAGES_FOLDER}'"
         }
 
 
