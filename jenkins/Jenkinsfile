@@ -29,6 +29,7 @@ pipeline {
     HCS_PACKAGES_FOLDER      = '/Users/i848340/hcs_packages'
 
     SLACK_CHANNEL            = 'pipelines'
+    SLACK_ENDPOINT           = 'https://hooks.slack.com/services/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'
     JUNIT_RESULT             = 'hybris/log/junit/TESTS-TestSuites.xml'
      
     //TODO 

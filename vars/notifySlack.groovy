@@ -1,7 +1,7 @@
 import groovy.json.JsonOutput
 
 def call(text, channel) {
-    def slackURL = 'https://hooks.slack.com/services/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'
+    def slackURL = '${env.SLACK_ENDPOINT}'
     def payload = JsonOutput.toJson([text      : text,
                                      channel   : channel,
                                      username  : "jenkins",
