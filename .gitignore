@@ -1,4 +1,78 @@
-target/*
-.idea/*
-?
-iot_beer.iml
+# More details about versioning hybris at https://wiki.hybris.com/display/hybrisALF/gitignore+file
+
+# We only version folders inside hybris and datahub
+/*
+!/.gitignore
+!/README.md
+!hybris/
+!datahub/
+!jenkins/
+!vars/
+
+### Datahub ###
+/datahub/apache-tomcat/logs
+/datahub/apache-tomcat/temp
+/datahub/apache-tomcat/work
+/datahub/apache-tomcat/webapps
+
+/datahub/datahub/extensions
+/datahub/datahub/datahub-webapp*.war
+
+### Hybris ###
+# Folders to ignore, whatever the place they are
+.metadata
+classes
+ 
+# Folders to ignore at the root of the repository
+hybris/log/
+hybris/temp/
+hybris/data/
+hybris/config/
+hybris/licenses/
+hybris/sampleconfigurations/
+hybris/environments/custom/
+
+# Filter only custom extension
+hybris/bin/*
+!hybris/bin/custom/
+
+# IDEs
+.idea
+idea-module-files
+*.iml
+
+# Filename patterns to ignore
+*.class
+build.xml
+!hybris/build.xml
+Generated*.java
+platformhome.properties
+*testclasses.xml
+extensioninfo.xsd
+*hmc.jar
+hmc.xsd
+items.xsd
+beans.xsd
+ruleset.xml
+*.log
+base.properties
+
+#  Addon specific copy folders
+**/_ui/addons
+**/views/addons
+**/tld/addons
+**/tags/addons
+**/messages/addons
+*_bof.jar
+
+wro_addons.xml
+**/web/addonsrc/
+**/web/commonwebsrc/
+**/web/webroot/WEB-INF/views/addons/
+**/web/webroot/WEB-INF/tags/addons/
+**/web/webroot/WEB-INF/tld/addons/
+**/web/webroot/WEB-INF/messages/addons/
+**/web/webroot/_ui/addons/
+**/web/webroot/WEB-INF/_ui-src/addons/
+**/web/webroot/cmscockpit/
+**/web/webroot/cockpit/
