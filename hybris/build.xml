@@ -1,0 +1,38 @@
+<project default="envconfig" basedir=".">
+
+    <!-- Use other environments passing: -Denvironment=dev -->
+    <property name="environment" value="local"/>
+
+    <property name="HOME" location="${basedir}"/>
+    <property name="CONFIG_DIR" location="${HOME}/config"/>
+    <property name="ENV_CONFIG_DIR" location="${HOME}/environments/${environment}"/>
+    <property name="COMMON_CONFIG_DIR" location="${HOME}/environments/common"/>
+    <property name="CUSTOM_CONFIG_DIR" location="${HOME}/environments/custom"/>
+
+    <echo>-------------------------------------------------------------------------------</echo>
+    <echo>Current environment: ${environment}</echo>
+    <echo>Platform home: ${HOME}</echo>
+    <echo>-------------------------------------------------------------------------------</echo>
+
+    <target name="envconfig">
+        <mkdir dir="${CUSTOM_CONFIG_DIR}"/>
+        <copy todir="${CONFIG_DIR}" overwrite="true">
+            <fileset dir="${COMMON_CONFIG_DIR}" includes="**"/>
+            <fileset dir="${ENV_CONFIG_DIR}" includes="**"/>
+            <fileset dir="${CUSTOM_CONFIG_DIR}" includes="**"/>
+        </copy>
+        <concat destfile="${CONFIG_DIR}/local.properties" fixlastline="true">
+            <header filtering="no" trimleading="yes">
+                # This file will be overwritten whenever 'ant envconfig' is called.
+                # Add properties to the hybris/environments/ folders accordingly.
+                #  Hint: put properties that are only common to your machine (tenants, memory, etc) at hybris/environments/custom/local.properties
+                # this file will not be versioned on git and its content is placed at the end of this file.
+
+            </header>
+            <fileset file="${COMMON_CONFIG_DIR}/local.properties" />
+            <fileset file="${ENV_CONFIG_DIR}/local.properties" />
+            <fileset file="${CUSTOM_CONFIG_DIR}/local.properties" />
+        </concat>
+    </target>
+
+</project>

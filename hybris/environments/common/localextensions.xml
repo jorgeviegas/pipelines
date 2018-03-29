@@ -1,0 +1,22 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' depth='6'/>
+    <extension name='mcc' />
+    <extension name='backoffice' />
+    <extension name='solrserver' />
+    <extension name='athenascockpits' />
+    <extension name='athenasfulfilmentprocess' />
+    <extension name='athenasstorefront' />
+    <extension name='athenasinitialdata' />
+    <extension name='basecommercebackoffice' />
+    
+    <extension name='sapmodel'/>
+    <extension name='sapmodelbackoffice'/>
+    <extension name='sapcustomerb2c'/>
+    <extension name='sapproductavailabilitybackoffice'/>
+    <extension name='sapproductavailability'/>
+    <extension name='b2bsapproductavailability'/>
+
+    <extension name='datahubbackoffice'/>
+  </extensions>
+</hybrisconfig>

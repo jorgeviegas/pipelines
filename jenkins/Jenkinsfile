@@ -5,8 +5,8 @@ pipeline {
   agent any
 
   environment {
-    RUN_RESET_PLATFORM_STEP  = false
-    RUN_TESTS_STEP           = false
+    RUN_RESET_PLATFORM_STEP  = true
+    RUN_TESTS_STEP           = true
     RUN_NOTIFY_STEP          = true
     RUN_SONAR_STEP           = false
     RUN_PRODUCTION_PACKAGING = true
@@ -33,7 +33,7 @@ pipeline {
     JUNIT_RESULT             = 'hybris/log/junit/TESTS-TestSuites.xml'
      
     //TODO 
-    HYBRIS_ZIP               = '../../../../binaries/hybris64.zip'
+    HYBRIS_ZIP               = '/Users/i848340/binaries/hybris-6.4.0.0.zip'
 
     //SCANNER_HOME = tool 'SonarQube';
   }
