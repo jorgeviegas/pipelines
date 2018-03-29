@@ -6,11 +6,12 @@ pipeline {
 
   environment {
     RUN_RESET_PLATFORM_STEP  = true
-    RUN_TESTS_STEP           = true
+    RUN_TESTS_STEP           = false
     RUN_NOTIFY_STEP          = true
     RUN_SONAR_STEP           = false
     RUN_PRODUCTION_PACKAGING = true
     HCS_PACKAGING            = false
+    RUN_DEPLOYMENT_SANDBOX   = true
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
@@ -27,12 +28,12 @@ pipeline {
     HYBRIS_HOME              = "${workspace}/hybris"
     ANT_INSTALATION          = 'hybris-ant'
     HCS_PACKAGES_FOLDER      = '/Users/i848340/hcs_packages'
+    YCONS_PATH               = '/Users/i848340/athenas-consolidation'
 
     SLACK_CHANNEL            = 'pipelines'
     SLACK_ENDPOINT           = 'https://hooks.slack.com/services/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'
     JUNIT_RESULT             = 'hybris/log/junit/TESTS-TestSuites.xml'
      
-    //TODO 
     HYBRIS_ZIP               = '/Users/i848340/binaries/hybris-6.4.0.0.zip'
 
     //SCANNER_HOME = tool 'SonarQube';
@@ -81,6 +82,16 @@ pipeline {
       }
       steps {   
         generateProductionPackage true
+      }
+    }
+
+    stage('Deploy to Sandbox') {
+      when {
+          beforeAgent true
+          environment name: 'RUN_DEPLOYMENT_SANDBOX', value: 'true'
+      }
+      steps {   
+        deployToSandbox()
       }
     }
 
