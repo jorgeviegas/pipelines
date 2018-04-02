@@ -6,7 +6,7 @@ def call() {
     dir (env.YCONS_PLATFORM_HOME){
         sh 'chmod +x setantenv.sh'
         sh '. ./setantenv.sh'
-        sh 'chmod +x hybrisserver.sh'
+        sh 'chmod +x hybrisserver.sh'   
         sh 'chmod +x tomcat/bin/*.sh'
         sh './hybrisserver.sh stop'
     }
@@ -29,6 +29,9 @@ def call() {
         sh 'chmod +x setantenv.sh'
         sh '. ./setantenv.sh'
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
+    }
+
+    dir(env.YCONS_PLATFORM_HOME){
         sh 'ant'
     }
     

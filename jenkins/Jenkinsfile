@@ -46,6 +46,13 @@ pipeline {
           echo "Branch: ${env.BRANCH_NAME} "
           echo "Commit: ${env.GIT_COMMIT} "
           echo "Build mode: ${env.BUILD_MODE}"
+
+          def packageName = 'CUSTOMER-PROJECTID_VERSION'
+          packageName.replace('CUSTOMER', env.HCS_CUSTOMER_ID)
+          packageName.replace('PROJECT', env.HCS_PROJECT_ID)
+          packageName.replace('VERSION', env.HCS_PACKAGE_VERSION)
+  
+          echo packageName
       }
     }
 
