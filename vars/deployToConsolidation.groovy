@@ -7,7 +7,7 @@ def call() {
         sh 'chmod +x setantenv.sh'
         sh '. ./setantenv.sh'
         sh 'chmod +x hybrisserver.sh'
-        sh 'chmod +x tomcat/bin/'
+        sh 'find tomcat/bin/ -type d -exec chmod +x {} \;'
         sh './hybrisserver.sh stop'
     }
     
