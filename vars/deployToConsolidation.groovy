@@ -31,7 +31,7 @@ def call() {
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
     }
 
-    withAnt('hybris-cons-ant'){
+    withAnt(installation: 'hybris-cons-ant'){
         sh 'ant'
     }
     
