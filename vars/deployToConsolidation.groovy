@@ -31,7 +31,7 @@ def call() {
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
     }
 
-    dir(env.YCONS_PLATFORM_HOME){
+    withAnt('hybris-cons-ant'){
         sh 'ant'
     }
     
