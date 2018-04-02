@@ -21,10 +21,10 @@ def call() {
     }
     
     // Copy tomcat configuration and validate config folder
-    withAnt('hybris-cons-ant'){
-         dir(env.YCONS_PLATFORM_HOME){
-            sh 'ant'
-         }
+    dir(env.YCONS_PLATFORM_HOME){
+        sh '. ./setantenv.sh'
+        sh 'chmod +x apache-ant-1.9.1/bin/ant'
+        sh 'ant'
     }
     
     // Start server with new version
