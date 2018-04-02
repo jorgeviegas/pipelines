@@ -5,7 +5,7 @@ pipeline {
   agent any
 
   environment {
-    RUN_RESET_PLATFORM_STEP  = true
+    RUN_RESET_PLATFORM_STEP  = false
     RUN_TESTS_STEP           = false
     RUN_NOTIFY_STEP          = true
     RUN_SONAR_STEP           = false
