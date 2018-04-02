@@ -4,6 +4,7 @@ def call() {
 
     // Stop hybris server
     dir (env.YCONS_PLATFORM_HOME){
+        sh 'chmod +x hybrisserver.sh'
         sh './hybrisserver.sh stop'
     }
     
