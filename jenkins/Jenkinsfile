@@ -42,19 +42,10 @@ pipeline {
 
   stages {
     stage('Log Info') {
-      environment { 
-        PACKAGE_NAME = '' 
-      }
       steps {           
           echo "Branch: ${env.BRANCH_NAME} "
           echo "Commit: ${env.GIT_COMMIT} "
           echo "Build mode: ${env.BUILD_MODE}"
-
-          env.PACKAGE_NAME.replace('CUSTOMER', env.HCS_CUSTOMER_ID)
-          env.PACKAGE_NAME.replace('PROJECT', env.HCS_PROJECT_ID)
-          env.PACKAGE_NAME.replace('VERSION', env.HCS_PACKAGE_VERSION)
-  
-          echo env.PACKAGE_NAME
       }
     }
 
