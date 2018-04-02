@@ -29,10 +29,10 @@ def call() {
         sh 'chmod +x setantenv.sh'
         sh '. ./setantenv.sh'
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
-    }
 
-    withAnt(installation: 'hybris-cons-ant'){
-        sh 'ant'
+        withAnt(installation: 'hybris-cons-ant'){
+            sh 'ant'
+        }
     }
     
     // Start server with new version
