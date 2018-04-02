@@ -50,12 +50,11 @@ pipeline {
           echo "Commit: ${env.GIT_COMMIT} "
           echo "Build mode: ${env.BUILD_MODE}"
 
-          env.PACKAGE_NAME = 'CUSTOMER-PROJECTID_VERSION'
-          packageName.replace('CUSTOMER', env.HCS_CUSTOMER_ID)
-          packageName.replace('PROJECT', env.HCS_PROJECT_ID)
-          packageName.replace('VERSION', env.HCS_PACKAGE_VERSION)
+          env.PACKAGE_NAME.replace('CUSTOMER', env.HCS_CUSTOMER_ID)
+          env.PACKAGE_NAME.replace('PROJECT', env.HCS_PROJECT_ID)
+          env.PACKAGE_NAME.replace('VERSION', env.HCS_PACKAGE_VERSION)
   
-          echo packageName
+          echo env.PACKAGE_NAME
       }
     }
 
