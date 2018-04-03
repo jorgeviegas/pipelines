@@ -49,11 +49,17 @@ pipeline {
         script{
           switch(GIT_BRANCH) {
             case "develop":
-            BUILD_MODE = "dev"
-            break
-          default:
-            BUILD_MODE = "djojoef"
-            break
+              BUILD_MODE = "cons"
+              break
+            case "full-reports":
+              BUILD_MODE = "full-reports"
+              break
+            case "full-reports":
+              BUILD_MODE = "full-reports"
+              break
+            default:
+              BUILD_MODE = "djojoef"
+              break
           }
           echo BUILD_MODE
         }
@@ -64,7 +70,7 @@ pipeline {
       steps {           
           echo "Branch: ${env.BRANCH_NAME} "
           echo "Commit: ${env.GIT_COMMIT} "
-          echo "Build mode: ${env.BUILD_MODE}"
+          echo "Build mode: ${BUILD_MODE}"
       }
     }
 
@@ -145,7 +151,7 @@ pipeline {
       }
       steps {   
         echo BUILD_MODE
-        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT}", 'pipelines'
+        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT} // Build mode: ${BUILD_MODE}", env.SLACK_CHANNEL
       }
     }
   }
