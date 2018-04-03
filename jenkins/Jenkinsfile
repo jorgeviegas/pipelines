@@ -7,11 +7,12 @@ pipeline {
   environment {
     RUN_RESET_PLATFORM_STEP  = false
     RUN_TESTS_STEP           = false
-    RUN_NOTIFY_STEP          = true
     RUN_SONAR_STEP           = false
-    RUN_PRODUCTION_PACKAGING = true
+    RUN_PRODUCTION_PACKAGING = false
     HCS_PACKAGING            = false
-    RUN_DEPLOYMENT_SANDBOX   = true
+    RUN_DEPLOYMENT_SANDBOX   = false
+    RUN_NOTIFY_STEP          = false
+
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
@@ -41,6 +42,13 @@ pipeline {
   }
 
   stages {
+
+    stage('Configure Steps') {
+      steps {           
+          configureSteps()
+      }
+    }
+
     stage('Log Info') {
       steps {           
           echo "Branch: ${env.BRANCH_NAME} "
