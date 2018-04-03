@@ -26,5 +26,7 @@ def call() {
 
         echo packageName
 
+        // ssh
+
     }
 }

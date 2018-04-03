@@ -78,7 +78,7 @@ pipeline {
     stage('Build') {
       when {
           beforeAgent true
-          environment name: 'RUN_BUILD_STEP', value: 'false'
+          environment name: 'RUN_BUILD_STEP', value: 'true'
       }
       steps {
         antBuilds()
