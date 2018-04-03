@@ -1,5 +1,7 @@
 @Library('pipeline-library')_
 
+def BUILD_MODE = 'lala'
+
 pipeline {
 
   agent any
@@ -19,8 +21,6 @@ pipeline {
     HCS_PROJECT_ID           = 'hc2'
     HCS_PACKAGE_VERSION      = 'v01.01'
     HCS_PACKAGE_SKELETON     = "${workspace}/jenkins/hcs_package_skeleton.zip"
-
-    BUILD_MODE               = 'pr-builder'
   
     STOREFRONT_NAME          = 'athenasstorefront'
     PROJECT_PACKAGE          = 'com.sap.cd.b2bmvp'
