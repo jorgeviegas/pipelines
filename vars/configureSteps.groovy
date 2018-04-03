@@ -4,11 +4,11 @@ def call() {
 	def version = "1.2"
     switch(GIT_BRANCH) {
     	case "develop":
-            result = "dev"
+            BUILD_MODE = "dev"
     		break
   		default:
-    		result = "def"
+    		BUILD_MODE = "def"
     		break
 	}
-	echo "${result}"
+	echo "${BUILD_MODE}"
 }
