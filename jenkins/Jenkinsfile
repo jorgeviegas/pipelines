@@ -8,10 +8,11 @@ pipeline {
     RUN_RESET_PLATFORM_STEP  = false
     RUN_TESTS_STEP           = false
     RUN_SONAR_STEP           = false
+    RUN_BUILD_STEP           = false
     RUN_PRODUCTION_PACKAGING = false
     HCS_PACKAGING            = false
     RUN_DEPLOYMENT_SANDBOX   = false
-    RUN_NOTIFY_STEP          = false
+    RUN_NOTIFY_STEP          = true
 
 
     HCS_CUSTOMER_ID          = 'acme'
@@ -77,7 +78,7 @@ pipeline {
     stage('Build') {
       when {
           beforeAgent true
-          environment name: 'RUN_PRODUCTION_PACKAGING', value: 'false'
+          environment name: 'RUN_BUILD_STEP', value: 'false'
       }
       steps {
         antBuilds()
@@ -133,6 +134,7 @@ pipeline {
           environment name: 'RUN_NOTIFY_STEP', value: 'true'
       }
       steps {   
+        echo "${result}"
         notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT}", 'pipelines'
       }
     }
