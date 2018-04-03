@@ -10,5 +10,5 @@ def call() {
     		BUILD_MODE = "def"
     		break
 	}
-	echo "${BUILD_MODE}"
+	echo BUILD_MODE
 }
