@@ -8,14 +8,13 @@ pipeline {
 
   environment {
     RUN_RESET_PLATFORM_STEP  = false
-    RUN_TESTS_STEP           = false
+    RUN_TESTS_STEP           = true
     RUN_SONAR_STEP           = false
     RUN_BUILD_STEP           = false
     RUN_PRODUCTION_PACKAGING = false
     HCS_PACKAGING            = false
     RUN_DEPLOYMENT_SANDBOX   = false
     RUN_NOTIFY_STEP          = true
-
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
@@ -43,34 +42,10 @@ pipeline {
   }
 
   stages {
-
-    stage('Configure Steps') {
-      steps {           
-        script{
-          switch(GIT_BRANCH) {
-            case "develop":
-              BUILD_MODE = "cons"
-              break
-            case "full-reports":
-              BUILD_MODE = "full-reports"
-              break
-            case "full-reports":
-              BUILD_MODE = "full-reports"
-              break
-            default:
-              BUILD_MODE = "djojoef"
-              break
-          }
-          echo BUILD_MODE
-        }
-      }
-    }
-
     stage('Log Info') {
       steps {           
           echo "Branch: ${env.BRANCH_NAME} "
           echo "Commit: ${env.GIT_COMMIT} "
-          echo "Build mode: ${BUILD_MODE}"
       }
     }
 
