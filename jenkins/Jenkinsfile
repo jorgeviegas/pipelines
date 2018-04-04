@@ -10,9 +10,10 @@ pipeline {
     RUN_SONAR_STEP           = false
     RUN_BUILD_STEP           = false
     RUN_PRODUCTION_PACKAGING = false
-    HCS_PACKAGING            = false
     RUN_DEPLOYMENT_SANDBOX   = false
-    RUN_NOTIFY_STEP          = false
+    RUN_DEPLOYMENT_HCS       = false
+    RUN_DEPLOYMENT_HCS_DEV   = false
+
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
@@ -21,7 +22,6 @@ pipeline {
   
     STOREFRONT_NAME          = 'athenasstorefront'
     PROJECT_PACKAGE          = 'com.sap.cd.b2bmvp'
-    ENVIRONMENT_NAME         = 'local'
  
     PLATFORM_HOME            = 'hybris/bin/platform'
     BINARIES_HOME            = 'hybris/bin/'
@@ -40,20 +40,10 @@ pipeline {
   }
 
   stages {
-    stage('Log Info') {
-      steps {        
-          echo "Build: ${env.RUN_DISPLAY_URL}"   
-          echo "Branch: ${env.BRANCH_NAME} "
-          echo "Commit: ${env.GIT_COMMIT} "
-      }
-    }
-
     stage('Reset Platform') {
       when { 
         beforeAgent true
         anyOf { 
-          branch 'master';
-          branch 'staging';
           environment name: 'RUN_RESET_PLATFORM_STEP', value: 'true'
         }
       }
@@ -61,20 +51,14 @@ pipeline {
         erasePlatform()
         unzipPlatform() 
       }
-    }
-    
-    stage('Checkout code from SCM') {
-      steps {   
-        checkout scm
-      }
-    }
+    } 
 
     stage('Build') {
       when { 
         beforeAgent true
         anyOf { 
           branch 'full-reports';
-          branch 'staging';
+          branch 'pr-builder';
           environment name: 'RUN_BUILD_STEP', value: 'true'
         }
       }
@@ -83,7 +67,7 @@ pipeline {
       }
     }
 
-    stage('Generate Production Package') {
+    stage('Generate Deployable') {
       when { 
         beforeAgent true
         anyOf { 
@@ -93,11 +77,11 @@ pipeline {
         }
       }
       steps {   
-        generateProductionPackage()
+        generateDeployable()
       }
     }
 
-    stage('Deploy to Sandbox') {
+    stage('Deploy to Consolidation') {
       when { 
         beforeAgent true
         anyOf { 
@@ -107,6 +91,35 @@ pipeline {
       }
       steps {   
         deployToConsolidation()
+      }
+    }
+
+    stage('Deploy to HCS DEV') {
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'hcs-dev';
+          environment name: 'RUN_DEPLOYMENT_HCS_DEV', value: 'true'
+        }
+      }
+      steps {   
+        deployToHCSDev()
+      }
+    }
+
+    stage('Deploy to HCS QA-Stag-Prod') {
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'hcs-qa';
+          branch 'hcs-stag';
+          branch 'hcs-prod';
+          environment name: 'RUN_DEPLOYMENT_HCS', value: 'true'
+        }
+      }
+      steps {   
+        generateHCSPackage()
+        deployToHCS()
       }
     }
 
@@ -138,15 +151,11 @@ pipeline {
         }   
       }
     }
+  }
 
-    stage('Notify') {
-      when {
-          beforeAgent true
-          environment name: 'RUN_NOTIFY_STEP', value: 'true'
-      }
-      steps {   
-        notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
-      }
+  post { 
+    always { 
+      notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
     }
   }
 }
