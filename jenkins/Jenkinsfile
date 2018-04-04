@@ -152,10 +152,12 @@ pipeline {
       }
     }
   }
-
-  post { 
+  node{
+    post { 
     always { 
       notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
     }
   }
+  }
+  
 }
