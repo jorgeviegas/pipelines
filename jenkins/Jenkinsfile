@@ -1,20 +1,18 @@
 @Library('pipeline-library')_
 
-def BUILD_MODE = 'lala'
-
 pipeline {
 
   agent any
 
   environment {
     RUN_RESET_PLATFORM_STEP  = false
-    RUN_TESTS_STEP           = true
+    RUN_TESTS_STEP           = false
     RUN_SONAR_STEP           = false
-    RUN_BUILD_STEP           = true
+    RUN_BUILD_STEP           = false
     RUN_PRODUCTION_PACKAGING = false
     HCS_PACKAGING            = false
     RUN_DEPLOYMENT_SANDBOX   = false
-    RUN_NOTIFY_STEP          = true
+    RUN_NOTIFY_STEP          = false
 
     HCS_CUSTOMER_ID          = 'acme'
     HCS_PROJECT_ID           = 'hc2'
@@ -51,9 +49,13 @@ pipeline {
     }
 
     stage('Reset Platform') {
-      when {
-          beforeAgent true
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'master';
+          branch 'staging';
           environment name: 'RUN_RESET_PLATFORM_STEP', value: 'true'
+        }
       }
       steps {           
         erasePlatform()
@@ -68,9 +70,13 @@ pipeline {
     }
 
     stage('Build') {
-      when {
-          beforeAgent true
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'full-reports';
+          branch 'staging';
           environment name: 'RUN_BUILD_STEP', value: 'true'
+        }
       }
       steps {
         antBuilds()
@@ -78,19 +84,26 @@ pipeline {
     }
 
     stage('Generate Production Package') {
-      when {
-          beforeAgent true
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'develop';
+          branch 'hcs-*';
           environment name: 'RUN_PRODUCTION_PACKAGING', value: 'true'
+        }
       }
       steps {   
-        generateProductionPackage true
+        generateProductionPackage()
       }
     }
 
-    stage('Deploy to Consolidation') {
-      when {
-          beforeAgent true
+    stage('Deploy to Sandbox') {
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'develop';
           environment name: 'RUN_DEPLOYMENT_SANDBOX', value: 'true'
+        }
       }
       steps {   
         deployToConsolidation()
@@ -98,9 +111,12 @@ pipeline {
     }
 
     stage('Run Tests') {
-      when {
-          beforeAgent true
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'full-reports';
           environment name: 'RUN_TESTS_STEP', value: 'true'
+        }
       }
       steps {   
         runTests()
@@ -108,9 +124,12 @@ pipeline {
     }
 
     stage('SonarQube') {
-      when {
-          beforeAgent true
+      when { 
+        beforeAgent true
+        anyOf { 
+          branch 'full-reports';
           environment name: 'RUN_SONAR_STEP', value: 'true'
+        }
       }
       steps {   
         withSonarQubeEnv('SonarQube') {
@@ -126,8 +145,7 @@ pipeline {
           environment name: 'RUN_NOTIFY_STEP', value: 'true'
       }
       steps {   
-        echo BUILD_MODE
-        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT} // Build mode: ${BUILD_MODE} // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
+        notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
       }
     }
   }
