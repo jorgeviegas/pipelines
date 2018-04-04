@@ -150,11 +150,10 @@ pipeline {
           sh "${env.SCANNER_HOME}/bin/sonar-scanner -Djavax.net.debug=all -Djavax.net.debug=ssl:handshake -Dproject.settings=./sonar.properties"
         }   
       }
-    }
-
-    post { 
-      always { 
-        notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
+      post { 
+        always { 
+          notifySlack "Pipeline ${env.BRANCH_NAME} finished! // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
+        }
       }
     }
   }
