@@ -127,7 +127,7 @@ pipeline {
       }
       steps {   
         echo BUILD_MODE
-        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT} // Build mode: ${BUILD_MODE}", env.SLACK_CHANNEL
+        notifySlack "Hybris is up and running! Branch: ${env.BRANCH_NAME} // Commit: ${env.GIT_COMMIT} // Build mode: ${BUILD_MODE} // Blue Ocean: ${env.RUN_DISPLAY_URL}", env.SLACK_CHANNEL
       }
     }
   }
