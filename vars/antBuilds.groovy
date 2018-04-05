@@ -8,14 +8,14 @@ def call(Map conf = [:]) {
         dir (conf['hybris_home']) {
             sh 'rm -rf config'
         }
-        
+
        	dir (conf['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
             sh 'ant clean -Dinput.template=develop'
     	}
 
     	 dir (conf['hybris_home']) {
-     		sh "ant envconfig -Denvironment=cons"
+     		sh "ant envconfig -Denvironment=dev"
      		
    		}
 

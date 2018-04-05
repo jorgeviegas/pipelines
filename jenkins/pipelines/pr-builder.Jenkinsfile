@@ -16,12 +16,12 @@ pipeline {
       }
     } 
 
-    //stage('Reset Platform') {
-   //   steps {         
-  //      erasePlatform configs
- //       unzipPlatform configs 
-//      }
-//    } 
+    stage('Reset Platform') {
+     steps {         
+        erasePlatform configs
+        unzipPlatform configs 
+      }
+    } 
 
     stage('Build') {
       steps {
