@@ -25,7 +25,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        antBuilds configs
+        antBuilds configs:configs, envName:"cons"
       }
     }
 
