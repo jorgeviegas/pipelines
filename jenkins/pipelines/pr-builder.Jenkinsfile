@@ -1,8 +1,10 @@
 @Library('hybris-pipeline-libraries')_
 
-
-
 pipeline {
+
+  environment {
+     PROPS = readProperties(file:"jenkins/pipeline.properties")
+   }
 
   agent any
 
@@ -10,15 +12,13 @@ pipeline {
 
     stage('Load Proeprties') {
       steps {    
-        script{
-          def props = readProperties(file:"jenkins/pipeline.properties")
-        }
+        echo env.PROPS['hcs_project_id']
       }
     } 
 
     stage('Reset Platform') {
       steps {         
-        erasePlatform props
+        erasePlatform env.PROPS
         unzipPlatform() 
       }
     } 
