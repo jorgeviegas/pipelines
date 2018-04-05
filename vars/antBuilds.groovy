@@ -2,7 +2,7 @@
 
 def call(Map configs = [:], String envName) {
 
-   withAnt(installation: 'hybris-ant'){
+   withAnt(installation: configs['ant_instalation']){
     	dir (configs['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
      		sh 'ant clean'
