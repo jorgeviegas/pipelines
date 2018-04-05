@@ -1,8 +1,6 @@
 @Library('hybris-pipeline-libraries')_
 
-node{
-  def props = readProperties(file:"jenkins/pipeline.properties")
-}
+
 
 pipeline {
 
@@ -12,12 +10,17 @@ pipeline {
 
     stage('Load Proeprties') {
       steps {    
+        script{
+          def props = readProperties(file:"jenkins/pipeline.properties")
+        }
         echo props['hcs_customer_id']
       }
     } 
 
     stage('Reset Platform') {
-      steps {           
+      steps {  
+        echo props['hcs_customer_id']
+         
         erasePlatform()
         unzipPlatform() 
       }
