@@ -1,6 +1,6 @@
 @Library('hybris-pipeline-libraries')_
 
-def props = readProperties file:"${workspace}/jenkins/pipeline.properties"
+def props = readProperties file:"jenkins/pipeline.properties"
 
 pipeline {
 
