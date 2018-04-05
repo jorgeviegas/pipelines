@@ -6,6 +6,6 @@ def call(Map configs = [:]) {
      		sh "ant unittests"
     	}
 	
-        junit "${configs['junit_result']}"
+        junit configs['junit_result']
     }  
 }

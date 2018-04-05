@@ -31,7 +31,7 @@ pipeline {
 
     stage('Run Unit Tests') {
       steps {   
-        runUnitTests()
+        runUnitTests configs
       }
     }
   }
