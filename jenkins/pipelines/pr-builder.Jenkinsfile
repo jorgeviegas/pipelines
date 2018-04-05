@@ -14,7 +14,7 @@ pipeline {
 
     stage('Load Properties') {
       steps {    
-        loadProperties configs
+        configs = loadProperties
       }
     } 
 
