@@ -5,10 +5,12 @@ pipeline {
   agent any
 
   stages {
-    
+
     stage('Load Properties') {
-      steps {           
-        loadProperties() 
+      steps {    
+        script{
+            def props = readProperties file:"${workspace}/jenkins/pipeline.properties"
+        }       
       }
     }
 
