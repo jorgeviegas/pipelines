@@ -1,23 +1,23 @@
 #!/usr/bin/env groovy
 
-def call(Map configs = [:], String envName) {
+def call(Map conf = [:], String envName) {
 
-   withAnt(installation: configs['ant_instalation']){
-    	dir (configs['platform_home']) {
+   withAnt(installation: conf['ant_instalation']){
+    	dir (conf['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
      		sh 'ant clean'
     	}
 
-    	 dir (configs['hybris_home') {
+    	 dir (conf['hybris_home']) {
      		sh "ant envconfig -Denvironment=${envName}"
      		
    		}
 
-   		dir (env.PLATFORM_HOME) {
+   		dir (conf['platform_home']) {
     		sh 'ant customize'
 
     		try {
-    			sh "ant reinstall_addons -Dtarget.storefront=${configs['storefront_name']}"
+    			sh "ant reinstall_addons -Dtarget.storefront=${conf['storefront_name']}"
     		}
     		catch(exc) {
     			echo 'Error during reinstall_addons. Maybe you dont have any addons to install?'
