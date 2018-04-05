@@ -3,7 +3,7 @@
 pipeline {
 
   environment {
-     PROPS = readProperties(file:"jenkins/pipeline.properties")
+     PROPS = ""
    }
 
   agent any
@@ -12,6 +12,9 @@ pipeline {
 
     stage('Load Proeprties') {
       steps {    
+        script{
+         PROPS = readProperties(file:"jenkins/pipeline.properties")
+        }
         echo env.PROPS['hcs_project_id']
       }
     } 
