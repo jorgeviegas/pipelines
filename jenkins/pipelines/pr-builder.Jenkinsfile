@@ -13,7 +13,6 @@ pipeline {
         script{
           def props = readProperties(file:"jenkins/pipeline.properties")
         }
-        echo props['hcs_customer_id']
       }
     } 
 
@@ -21,7 +20,7 @@ pipeline {
       steps {  
         echo props['hcs_customer_id']
          
-        erasePlatform()
+        erasePlatform props
         unzipPlatform() 
       }
     } 
