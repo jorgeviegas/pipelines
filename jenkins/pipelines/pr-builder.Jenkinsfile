@@ -13,9 +13,9 @@ pipeline {
     stage('Load Proeprties') {
       steps {    
         script{
-         PROPS = readProperties(file:"jenkins/pipeline.properties")
+          PROPS = readProperties(file:"jenkins/pipeline.properties")
         }
-        echo env.PROPS['hcs_project_id']
+        echo PROPS['hcs_project_id']
       }
     } 
 
