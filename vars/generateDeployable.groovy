@@ -18,7 +18,7 @@ def call(Map conf = [:]) {
             sh "ant envconfig -Denvironment=${conf.environment_name}"
         }
 
-        dir (env.PLATFORM_HOME) {
+        dir (conf.platform_home) {
 
             sh "ant customize"
             
