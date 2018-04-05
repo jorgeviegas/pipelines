@@ -12,18 +12,16 @@ pipeline {
 
   stages {
 
-    stage('Load Proeprties') {
+    stage('Load Properties') {
       steps {    
-        script{
-          configs = readProperties(file:"jenkins/pipeline.properties")
-        }
+        loadProperties configs
       }
     } 
 
     stage('Reset Platform') {
       steps {         
         erasePlatform configs
-        unzipPlatform() 
+        unzipPlatform configs 
       }
     } 
 
