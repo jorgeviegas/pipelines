@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-def call(Map config = [:]) {
-	dir (config['hcs_customer_id']){
+def call() {
+	dir (PROPS['binaries_home']){
 		// remove platform binaries
 		sh 'rm -rf ext-* platform'
 	}

@@ -15,13 +15,12 @@ pipeline {
         script{
           PROPS = readProperties(file:"jenkins/pipeline.properties")
         }
-        echo PROPS['hcs_project_id']
       }
     } 
 
     stage('Reset Platform') {
       steps {         
-        erasePlatform env.PROPS
+        erasePlatform()
         unzipPlatform() 
       }
     } 
