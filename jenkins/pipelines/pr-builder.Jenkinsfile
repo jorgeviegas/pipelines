@@ -1,18 +1,12 @@
 @Library('hybris-pipeline-libraries')_
 
+def props = readProperties file:"${workspace}/jenkins/pipeline.properties"
+
 pipeline {
 
   agent any
 
   stages {
-
-    stage('Load Properties') {
-      steps {    
-        script{
-            def props = readProperties file:"${workspace}/jenkins/pipeline.properties"
-        }       
-      }
-    }
 
     stage('Reset Platform') {
       steps {           
