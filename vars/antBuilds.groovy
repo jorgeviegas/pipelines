@@ -4,9 +4,14 @@ def call(Map conf = [:]) {
 
    withAnt(installation: 'pr_builder'){
 
-    	dir (conf['platform_home']) {
+
+        dir (conf['hybris_home']) {
+            sh 'rm -rf config'
+        }
+        
+       	dir (conf['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
-     		sh 'ant clean'
+            sh 'ant clean -Dinput.template=develop'
     	}
 
     	 dir (conf['hybris_home']) {
