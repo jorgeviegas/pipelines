@@ -13,7 +13,7 @@ pipeline {
     stage('Load Proeprties') {
       steps {    
         script{
-          PROPS = readProperties(file:"jenkins/pipeline.properties")
+          env.PROPS = readProperties(file:"jenkins/pipeline.properties")
         }
       }
     } 
