@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 
 def call() {
-    readProperties "${workspace}/jenkins/pipeline.properties"
+    readProperties file:"${workspace}/jenkins/pipeline.properties"
 }
