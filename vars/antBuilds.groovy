@@ -2,7 +2,7 @@
 
 def call(Map conf = [:]) {
 
-   withAnt(installation: 'pr_builder'){
+   withAnt(installation: conf.ant_instalation){
 
 
         dir (conf['hybris_home']) {

@@ -12,6 +12,7 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
+          configs.ant_instalation = 'pr-builder'
         }
       }
     } 
