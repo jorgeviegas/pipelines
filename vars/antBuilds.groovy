@@ -3,6 +3,8 @@
 def call(java.util.LinkedHashMap conf = [:], java.lang.String envName = '') {
 
    withAnt(installation: conf['ant_instalation']){
+
+    echo conf['platform_home']
     	dir (conf['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
      		sh 'ant clean'
