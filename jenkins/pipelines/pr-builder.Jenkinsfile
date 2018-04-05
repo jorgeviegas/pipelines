@@ -1,5 +1,7 @@
 @Library('hybris-pipeline-libraries')_
 
+def configs = [:]
+
 pipeline {
 
   environment {
@@ -13,14 +15,14 @@ pipeline {
     stage('Load Proeprties') {
       steps {    
         script{
-          env.PROPS = readProperties(file:"jenkins/pipeline.properties")
+          configs = readProperties(file:"jenkins/pipeline.properties")
         }
       }
     } 
 
     stage('Reset Platform') {
       steps {         
-        erasePlatform()
+        erasePlatform configs
         unzipPlatform() 
       }
     } 
