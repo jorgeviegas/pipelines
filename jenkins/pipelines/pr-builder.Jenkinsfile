@@ -9,9 +9,9 @@ pipeline {
     stage('Load Proeprties') {
       steps {    
         script {       
-          def props = readProperties file:"jenkins/pipeline.properties"  
+          def props = readJSON file:"jenkins/pipeline.properties"  
         }
-        echo props["hcs_customer_id"]
+        echo props['hcs_customer_id']
       }
     } 
 
