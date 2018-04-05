@@ -4,10 +4,6 @@ def configs = [:]
 
 pipeline {
 
-  environment {
-     PROPS = ""
-   }
-
   agent any
 
   stages {
@@ -29,7 +25,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        antBuilds()
+        antBuilds configs
       }
     }
 

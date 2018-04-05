@@ -1,11 +1,11 @@
 #!/usr/bin/env groovy
 
-def call() {
-   withAnt(installation: env.ANT_INSTALATION){
-    	dir (env.PLATFORM_HOME) {		
+def call(Map configs = [:]) {
+   withAnt(installation: configs['ant_instalation']){
+    	dir (configs['platform_home']) {		
      		sh "ant unittests"
     	}
 	
-        junit "${env.JUNIT_RESULT}"
+        junit "${configs['junit_result']}"
     }  
 }
