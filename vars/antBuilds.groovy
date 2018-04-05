@@ -2,11 +2,11 @@
 
 def call(Map conf = [:]) {
 
-   withAnt(installation: conf['ant_instalation_pr_builder']){
+   withAnt(installation: 'pr_builder'){
 
     	dir (conf['platform_home']) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
-     		sh 'ant clean -f="build.xml"'
+     		sh 'ant clean'
     	}
 
     	 dir (conf['hybris_home']) {
