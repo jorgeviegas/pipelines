@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(Map conf = [:], String envName) {
+def call(LinkedHashMap conf = [:], String envName) {
 
    withAnt(installation: conf['ant_instalation']){
     	dir (conf['platform_home']) {
