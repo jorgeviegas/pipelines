@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 def call() {
-	dir ("${binaries_home}"){
+	dir ("${props.binaries_home}"){
 		// remove platform binaries
 		sh 'rm -rf ext-* platform'
 	}
