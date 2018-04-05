@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(java.util.LinkedHashMap conf = [:], java.lang.String envName = '') {
+def call(Map conf = [:]) {
 
    withAnt(installation: conf['ant_instalation']){
 
@@ -11,7 +11,7 @@ def call(java.util.LinkedHashMap conf = [:], java.lang.String envName = '') {
     	}
 
     	 dir (conf['hybris_home']) {
-     		sh "ant envconfig -Denvironment=${envName}"
+     		sh "ant envconfig -Denvironment=cons"
      		
    		}
 
