@@ -12,9 +12,8 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
-
-          // change below your pipeline specific properties
           configs.ant_instalation = 'hybris-cons-ant'
+          configs.environment_name = 'dev'
         }
       }
     } 

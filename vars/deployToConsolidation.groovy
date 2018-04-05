@@ -5,15 +5,8 @@ def call(Map conf = [:]) {
     def consPlatform = "${conf.ycons_path}/hybris/bin/platform"
     def consHybris = "${conf.ycons_path}/hybris"
     
-    // Stop hybris server
-    dir (consPlatform){
-        sh 'chmod +x setantenv.sh'
-        sh '. ./setantenv.sh'
-        sh 'chmod +x hybrisserver.sh'   
-        sh 'chmod +x tomcat/bin/*.sh'
-        sh './hybrisserver.sh stop'
-    }
-    
+    stopRunningServer consPlatform
+
     // Remove old version platform binaries
     dir (consHybris){
         sh 'rm -rf bin config'
