@@ -1,9 +1,10 @@
 @Library('hybris-pipeline-libraries')_
+@Library('piper-lib') _
 
 pipeline {
 
   agent any
-  
+
   stages {
 
     stage('Load Properties') {
