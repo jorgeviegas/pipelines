@@ -17,9 +17,7 @@ pipeline {
     } 
 
     stage('Reset Platform') {
-      steps {  
-        echo props['hcs_customer_id']
-         
+      steps {         
         erasePlatform props
         unzipPlatform() 
       }
