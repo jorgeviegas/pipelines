@@ -4,7 +4,6 @@ def call(Map conf = [:]) {
 
    withAnt(installation: conf.ant_instalation){
 
-
         dir (conf.hybris_home) {
             sh 'rm -rf config'
         }
