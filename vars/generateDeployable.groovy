@@ -8,7 +8,7 @@ def call(Map conf = [:]) {
             sh 'rm -rf config'
         }
 
-        setAntEnvironment conf.platform_home
+     //   setAntEnvironment conf.platform_home
 
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
