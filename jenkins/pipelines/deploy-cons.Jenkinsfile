@@ -6,6 +6,8 @@ pipeline {
 
   agent any
 
+  node {
+
   stages {
 
     stage('Load Properties') {
@@ -37,5 +39,5 @@ pipeline {
         deployToConsolidation configs
       }
     }  
-  }
+  } }
 }
