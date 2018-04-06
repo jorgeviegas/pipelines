@@ -8,15 +8,16 @@ pipeline {
 
 
   stages {
-  node {
 
     stage('Load Properties') {
       steps {    
+          node {
+
         script {
           configs = loadProperties()
           configs.ant_instalation = 'hybris-cons-ant'
           configs.environment_name = 'dev'
-        }
+        }}
       }
     } 
 
@@ -29,8 +30,10 @@ pipeline {
     } 
 
     stage('Generate Deployable') {
-      steps {   
-        generateDeployable configs
+      steps {  
+        node{ 
+          generateDeployable configs
+        }
       }
     }
 
@@ -39,5 +42,5 @@ pipeline {
         deployToConsolidation configs
       }
     }  
-  } }
+  } 
 }
