@@ -8,12 +8,11 @@ def call(Map conf = [:]) {
             sh 'rm -rf config'
         }
 
-        echo "ANT: ${conf.ant_instalation}"
         setAntEnvironment conf.platform_home
 
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
-     		sh 'ant clean -Dinput.template=develop'
+     		sh 'ant clean -Dinput.template=develop -f ${conf.platform_home}/build.xml'
         }
 
         dir (conf.hybris_home) {
