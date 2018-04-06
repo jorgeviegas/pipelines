@@ -8,6 +8,7 @@ def call(Map conf = [:]) {
             sh 'rm -rf config'
         }
 
+        echo "ANT: ${conf.ant_instalation}"
         setAntEnvironment conf.platform_home
 
         dir (conf.platform_home) {
