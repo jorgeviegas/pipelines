@@ -6,9 +6,9 @@ pipeline {
 
   agent any
 
-  node {
 
   stages {
+  node {
 
     stage('Load Properties') {
       steps {    
