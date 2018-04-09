@@ -12,6 +12,7 @@ def call(Map conf = [:]) {
 
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
+            sh 'pwd'
      		sh "ant clean -Dinput.template=develop -f ${conf.platform_home}/build.xml"
         }
 
