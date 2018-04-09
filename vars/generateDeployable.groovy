@@ -6,15 +6,11 @@ def call(Map conf = [:]) {
             sh 'rm -rf config'
         }
    
-        setAntEnvironment "${WORKSPACE}/${conf.platform_home}"
-
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
         }
 
    withAnt(installation: conf.ant_instalation){
-
-        setAntEnvironment "${WORKSPACE}/${conf.platform_home}"
 
         dir ("${WORKSPACE}/${conf.platform_home}") {
             sh "ant clean -Dinput.template=develop"         
