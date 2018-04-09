@@ -19,10 +19,10 @@ def call(Map conf = [:]) {
     
     // Replace platform binaries with new version
     dir (conf.hybris_home){
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip", dir:"${conf.ycons_path}", quiet:true
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Platform.zip", dir:"${env.ycons_path}", quiet:true
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Config.zip", dir:"${env.ycons_path}", quiet:true        
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Licence.zip", dir:"${env.ycons_path}", quiet:true        
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip", dir:conf.ycons_path, quiet:true
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Platform.zip", dir:conf.ycons_path, quiet:true
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Config.zip", dir:conf.ycons_path}, quiet:true        
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Licence.zip", dir:conf.ycons_path, quiet:true        
     }
     
     // Copy tomcat configuration and validate config folder
