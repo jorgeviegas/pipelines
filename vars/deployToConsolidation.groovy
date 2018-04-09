@@ -22,6 +22,7 @@ def call(Map conf = [:]) {
     
     // Copy tomcat configuration and validate config folder
     dir(consPlatform){
+
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
 
         withAnt(installation: 'hybris-cons-ant'){
