@@ -20,15 +20,15 @@ pipeline {
 
     stage('Reset Platform') {
       steps {           
-     //   erasePlatform configs
-     //   unzipPlatform configs 
+        erasePlatform configs
+        unzipPlatform configs 
         echo 'out'
       }
     } 
 
     stage('Generate Deployable') {
       steps {  
-          generateDeployable configs
+        generateDeployable configs
       }
     }
 

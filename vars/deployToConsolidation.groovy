@@ -37,6 +37,6 @@ def call(Map conf = [:]) {
     
     // Start server with new version
     dir (consPlatform){
-        sh './hybrisserver.sh start'
+        sh 'BUILD_ID=dontKillMe ./hybrisserver.sh start'
     }
 }
