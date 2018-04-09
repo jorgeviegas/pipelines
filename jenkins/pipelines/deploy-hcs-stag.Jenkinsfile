@@ -12,8 +12,8 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
-          configs.ant_instalation = 'deploy-cons'
-          configs.environment_name = 'dev'
+          configs.ant_instalation = 'deploy-stag'
+          configs.environment_name = 'hcs-stag'
         }
       }
     } 
@@ -31,15 +31,15 @@ pipeline {
       }
     }
 
-    stage('Deploy to Consolidation') {
+    stage('Generate HCS Package') {
       steps {   
-        deployToConsolidation configs
+         generateHCSPackage configs, 'stag'
       }
     }
 
     stage('Notifications'){
       steps {   
-        notifySlack configs, "Deploy to Consolidation is complete! <${configs.cons_url}| Link to storefront>", 'pipelines'
+        notifySlack configs, "Deploy to HCS Staging is complete! <${configs.hcs_stag_url}| Link to storefront>", 'pipelines'
       }
     }  
   } 

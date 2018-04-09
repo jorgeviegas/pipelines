@@ -1,39 +1,21 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(Map conf = [:], String env) {
 
-   dir (env.HYBRIS_HOME) {
+   dir (conf.hybris_home) {
      
+        // Clear temp hcs packages
         sh 'rm -rf temp_hcs_package'
         sh 'mkdir temp_hcs_package'
 
-        unzip zipFile:env.HCS_PACKAGE_SKELETON, dir:'temp_hcs_package', quiet:true
+        unzip zipFile:conf.hcs_package_skeleton, dir:'temp_hcs_package', quiet:true
 
         sh "cp temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip temp_hcs_package/hcs_package_skeleton/hybris/bin"
         sh "cp temp/hybris/hybrisServer/hybrisServer-Platform.zip temp_hcs_package/hcs_package_skeleton/hybris/bin"
-
-
-
-        switch (env.BRANCH_NAME) {
-        case "hcs-dev":
-            result = 'Pattern match'
-            break
-        default:
-            result = 'Default'
-            break
-        }
         
-        if (env.BRANCH_NAME == 'hcs-dev') {
-            sh "cp config/local.properties temp_hcs_package/hcs_package_skeleton/hybris/config/dev/customer.properties"
-        }
+        sh "cp config/local.properties temp_hcs_package/hcs_package_skeleton/hybris/config/stag/customer.properties"
 
-        //rename file to  HCS_CUSTOMER_ID - HCS_PROJECT_ID - HCS_PACKAGE_VERSION      = 'v01.01'
-
-        def packageName = 'CUSTOMER-PROJECTID_VERSION'
-        packageName.replace('CUSTOMER', env.HCS_CUSTOMER_ID)
-        packageName.replace('PROJECT', env.HCS_PROJECT_ID)
-        packageName.replace('VERSION', env.HCS_PACKAGE_VERSION)
-
+        def packageName = "${conf.hcs_customer_id}-${conf.hcs_project_id}_${conf.hcs_package_version}"
         echo packageName
 
         // ssh
