@@ -10,14 +10,9 @@ def call(Map conf = [:]) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
         }
 
-   withAnt(installation: conf.ant_instalation){
+   withAnt(installation: 'hybris-ant'){
 
-        dir (conf.platform_home){
-            sh 'chmod +x setantenv.sh'
-            sh '. ./setantenv.sh'
-        }
-
-        dir ("${WORKSPACE}/${conf.platform_home}") {
+        dir (conf.platform_home) {
             sh "ant clean -Dinput.template=develop"         
         }
 
