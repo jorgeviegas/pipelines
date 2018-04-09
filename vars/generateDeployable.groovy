@@ -12,6 +12,11 @@ def call(Map conf = [:]) {
 
    withAnt(installation: conf.ant_instalation){
 
+        dir (conf.platform_home){
+            sh 'chmod +x setantenv.sh'
+            sh '. ./setantenv.sh'
+        }
+
         dir ("${WORKSPACE}/${conf.platform_home}") {
             sh "ant clean -Dinput.template=develop"         
         }
