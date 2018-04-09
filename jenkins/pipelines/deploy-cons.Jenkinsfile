@@ -39,7 +39,7 @@ pipeline {
 
     stage('Notifications'){
       steps {   
-        notifySlack configs, 'Deploy to Consolidation is complete! Link: ${configs.cons_url}', 'pipeline'
+        notifySlack configs, "Deploy to Consolidation is complete! Link: ${configs.cons_url}", 'pipelines'
       }
     }  
   } 
