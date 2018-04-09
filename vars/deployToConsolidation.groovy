@@ -5,7 +5,12 @@ def call(Map conf = [:]) {
     def consPlatform = "${conf.ycons_path}/hybris/bin/platform"
     def consHybris = "${conf.ycons_path}/hybris"
     
-    stopRunningServer consPlatform
+    try {
+        stopRunningServer consPlatform
+    }
+    catch(exc) {
+        echo 'Error stopping server. Maybe the platform folder is incomplete?'
+    } 
 
     // Remove old version platform binaries
     dir (consHybris){

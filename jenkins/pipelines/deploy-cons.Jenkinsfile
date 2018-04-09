@@ -20,7 +20,7 @@ pipeline {
 
     stage('Reset Platform') {
       steps {           
-   //     erasePlatform configs
+     //   erasePlatform configs
      //   unzipPlatform configs 
         echo 'out'
       }
