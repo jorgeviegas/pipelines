@@ -36,7 +36,7 @@ def call(Map conf = [:]) {
     
     // Start server with new version
     dir (consPlatform){
-        withEnv(['BUILD_ID=dontKillMe']) {
+        withEnv(['JENKINS_NODE_COOKIE=dontKill']) {
             sh './hybrisserver.sh start'
         }
     }
