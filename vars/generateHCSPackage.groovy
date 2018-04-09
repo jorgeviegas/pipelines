@@ -17,12 +17,11 @@ def call(Map conf = [:], String env) {
         sh "cp config/local.properties hcs_package_skeleton/hybris/config/stag/customer.properties"
 
         def packageName = "${conf.hcs_customer_id}-${conf.hcs_project_id}_${conf.hcs_package_version}"
-        echo packageName
 
-
-        zip zipFile:packageName dir:"hcs_package_skeleton"
+        zip zipFile:packageName, dir:"hcs_package_skeleton"
 
         // ssh pack to hcs
+        //TODO
 
         // move package to archive
         sh "mv ${packageName} ${conf.hcs_packages_folder}"

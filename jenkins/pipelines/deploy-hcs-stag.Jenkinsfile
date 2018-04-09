@@ -20,8 +20,8 @@ pipeline {
 
     stage('Reset Platform') {
       steps {           
-        erasePlatform configs
-        unzipPlatform configs 
+        //erasePlatform configs
+       // unzipPlatform configs 
       }
     } 
 
