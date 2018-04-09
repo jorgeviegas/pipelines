@@ -10,7 +10,7 @@ def call(Map conf = [:]) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
         }
 
-   withAnt(installation: configs.ant_instalation){
+   withAnt(installation: conf.ant_instalation){
 
         dir (conf.platform_home) {
             sh "ant clean -Dinput.template=develop"         
