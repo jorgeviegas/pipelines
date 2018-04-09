@@ -35,6 +35,12 @@ pipeline {
       steps {   
         deployToConsolidation configs
       }
+    }
+
+    stage('Notifications'){
+      steps {   
+        notifySlack configs, 'Deploy to Consolidation is complete! Link: ${configs.cons_url}', 'pipeline'
+      }
     }  
   } 
 }
