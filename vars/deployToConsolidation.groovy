@@ -27,7 +27,6 @@ def call(Map conf = [:]) {
     
     // Copy tomcat configuration and validate config folder
     dir(consPlatform){
-
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
 
         withAnt(installation: 'hybris-cons-ant'){
@@ -37,6 +36,8 @@ def call(Map conf = [:]) {
     
     // Start server with new version
     dir (consPlatform){
-        sh 'BUILD_ID=dontKillMe ./hybrisserver.sh start'
+        withEnv(['BUILD_ID=dontKillMe']) {
+            sh './hybrisserver.sh start'
+        }
     }
 }

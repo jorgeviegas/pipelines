@@ -22,7 +22,6 @@ pipeline {
       steps {           
         erasePlatform configs
         unzipPlatform configs 
-        echo 'out'
       }
     } 
 
