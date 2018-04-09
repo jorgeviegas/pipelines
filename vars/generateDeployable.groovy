@@ -12,8 +12,11 @@ def call(Map conf = [:]) {
 
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
-            sh 'pwd'
-     		sh "ant clean -Dinput.template=develop"
+         
+        }
+
+        dir (conf.platform_home) {
+            sh "ant clean -Dinput.template=develop"         
         }
 
         dir (conf.hybris_home) {
