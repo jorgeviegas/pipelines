@@ -2,12 +2,11 @@
 
 def call(Map conf = [:]) {
 
-
         dir (conf.hybris_home) {
             sh 'rm -rf config'
         }
    
-        setAntEnvironment conf.platform_home
+        setAntEnvironment "${WORKSPACE}/${conf.platform_home}"
 
         dir (conf.platform_home) {
     		sh 'chmod +x apache-ant-1.9.1/bin/ant'
@@ -15,7 +14,9 @@ def call(Map conf = [:]) {
 
    withAnt(installation: conf.ant_instalation){
 
-        dir ("${WORKSPACE}/pipelines/deploy-cons/${conf.platform_home}") {
+        setAntEnvironment "${WORKSPACE}/${conf.platform_home}"
+
+        dir ("${WORKSPACE}/${conf.platform_home}") {
             sh "ant clean -Dinput.template=develop"         
         }
 
