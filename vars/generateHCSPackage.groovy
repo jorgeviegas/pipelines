@@ -16,7 +16,7 @@ def call(Map conf = [:], String env) {
         
         sh "cp config/local.properties hcs_package_skeleton/hybris/config/stag/customer.properties"
 
-        def packageName = "${conf.hcs_customer_id}-${conf.hcs_project_id}_${conf.hcs_package_version}"
+        def packageName = "${conf.hcs_customer_id}-${conf.hcs_project_id}_${conf.hcs_package_version}.zip"
 
         zip zipFile:packageName, dir:"hcs_package_skeleton"
 
