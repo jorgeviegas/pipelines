@@ -18,9 +18,9 @@ pipeline {
       }
     } 
 
-    stage('Sonar'){
-      steps {   
-        sonarQube configs.platform_home configs.hybris_home
+    stage('Sonar') {
+      steps {
+        sonarQube configs
       }
     }  
   } 
