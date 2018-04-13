@@ -6,7 +6,7 @@ def call(String platform = '', String hybrisHome = '') {
     	
         def scannerHome = tool 'SonarQube Scanner 2.8';
 
-        dir (conf.hybris_home) {
+        dir (hybrisHome) {
             echo 'teste teste teste'
         }
 	}  
