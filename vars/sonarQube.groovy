@@ -3,10 +3,9 @@
 def call(Map conf = [:]) {
 
    // withSonarQubeEnv('chedraui-sonar-qube'){
-   		echo "${workspace}"
         def scannerHome = tool 'chedraui-sonar-scanner';
-        dir (workspace + conf.sonar_configuration_path) {
-            sh "${scannerHome}/bin/sonar-scanner"
+        dir (workspace) {
+            sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=" + conf.sonar_configuration_file
         }
 	// }
 }
