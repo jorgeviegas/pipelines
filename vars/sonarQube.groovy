@@ -3,11 +3,10 @@
 def call(Map conf = [:]) {
 
    // withSonarQubeEnv('chedraui-sonar-qube'){
+   		echo "${workspace}"
         def scannerHome = tool 'chedraui-sonar-scanner';
-        sh 'whoami'
-        dir (conf.sonar_configuration_path) {
-        	sh 'whoami'
-            // sh "${scannerHome}/bin/sonar-scanner"
+        dir (workspace) {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
 	// }
 }
