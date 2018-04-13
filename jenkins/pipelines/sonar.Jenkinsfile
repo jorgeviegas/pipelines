@@ -12,8 +12,8 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
-          configs.ant_instalation = 'deploy-stag'
-          configs.environment_name = 'hcs-stag'
+          // configs.ant_instalation = 'deploy-stag'
+          // configs.environment_name = 'hcs-stag'
         }
       }
     } 
