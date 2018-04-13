@@ -3,7 +3,7 @@
 def call(Map conf = [:]) {
 
    // withSonarQubeEnv('chedraui-sonar-qube'){
-    	
+    	echo "test test test"
         def scannerHome = tool 'chedraui-sonar-scanner';
         dir (conf.sonar_configuration_file) {
         	echo "test test test"
