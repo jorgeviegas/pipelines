@@ -1,4 +1,4 @@
-@Library('hybris-pipeline-libraries@feature/sonar')_
+@Library('hybris-pipeline-libraries')_
 
 def configs = [:]
 
@@ -12,8 +12,8 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
-          // configs.ant_instalation = 'deploy-stag'
-          // configs.environment_name = 'hcs-stag'
+          configs.ant_instalation = 'deploy-stag'
+          configs.environment_name = 'hcs-stag'
         }
       }
     } 
