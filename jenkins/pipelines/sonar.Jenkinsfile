@@ -1,4 +1,4 @@
-@Library('hybris-pipeline-libraries')_
+@Library('hybris-pipeline-libraries@feature/sonar')_
 
 def configs = [:]
 
