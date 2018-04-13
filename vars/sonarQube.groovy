@@ -6,6 +6,8 @@ def call(Map conf = [:]) {
     	
         def scannerHome = tool 'chedraui-sonar-scanner';
         dir (conf.sonar_configuration_file) {
+        	echo "test test test"
+        	echo conf.sonar_configuration_file
             sh "${scannerHome}/bin/sonar-scanner"
         }
 	// }
