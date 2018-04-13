@@ -5,5 +5,9 @@ def call(String platform = '', String hybrisHome = '') {
    withSonarQubeEnv('chedraui-sonar-qube'){
     	
         def scannerHome = tool 'SonarQube Scanner 2.8';
+
+        dir (conf.hybris_home) {
+            echo 'teste teste teste'
+        }
 	}  
 }
