@@ -27,7 +27,7 @@ pipeline {
     // change to: success
     always {
       echo 'Storing artifacts'
-      archieveArtifacts '.scannerwork/*'
+      archiveArtifacts '.scannerwork/*'
     }
   }
 }
