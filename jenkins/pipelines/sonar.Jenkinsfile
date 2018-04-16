@@ -24,11 +24,7 @@ pipeline {
   }
 
   post {
-    // change to: success
-    always {
-      echo 'Storing artifacts'
-      echo "${configs.sonar_artifact_folder}/**"
-      echo "${configs.sonar_artifact_folder}/**"
+    success {
       archiveArtifacts "${configs.sonar_artifact_folder}/**"
     }
   }

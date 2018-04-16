@@ -3,6 +3,6 @@
 def call(Map conf = [:]) {
 
         dir (workspace) {
-            sh "${conf.sonar_scanner_bin}/sonar-scanner -Dproject.settings=${conf.sonar_config_folder}/*-project.properties"
+            sh "${conf.sonar_scanner_bin}/sonar-scanner -Dproject.settings=${conf.sonar_config_folder}/sonar-project.properties"
         }
 }
