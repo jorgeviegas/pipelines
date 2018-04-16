@@ -12,8 +12,6 @@ pipeline {
       steps {    
         script {
           configs = loadProperties()
-          configs.ant_instalation = 'deploy-stag'
-          configs.environment_name = 'hcs-stag'
         }
       }
     } 
@@ -22,6 +20,14 @@ pipeline {
       steps {
         sonarQube configs
       }
-    }  
-  } 
+    }
+  }
+
+  post {
+    // change to: success
+    always {
+      echo 'Storing artifacts'
+      archieveArtifacts '.sonnar-scanner/*'
+    }
+  }
 }
