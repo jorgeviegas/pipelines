@@ -1,9 +1,8 @@
 #!/usr/bin/env groovy
 
-def call(String platform = '', String hybrisHome = '') {
+def call(Map conf = [:]) {
 
-   withSonarQubeEnv('chedraui-sonar-qube'){
-    	
-        def scannerHome = tool 'SonarQube Scanner 2.8';
-	}  
+        dir (workspace) {
+            sh "${conf.sonar_scanner_home}/bin/sonar-scanner -Dproject.settings=${conf.sonar_config_folder}/sonar-project.properties"
+        }
 }
