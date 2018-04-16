@@ -27,7 +27,9 @@ pipeline {
     // change to: success
     always {
       echo 'Storing artifacts'
-      archiveArtifacts '${configs.sonar_artifact_folder}/**'
+      echo "${configs.sonar_artifact_folder}/**"
+      echo "${configs.sonar_artifact_folder}/**"
+      archiveArtifacts "${configs.sonar_artifact_folder}/**"
     }
   }
 }
