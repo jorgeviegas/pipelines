@@ -25,7 +25,7 @@ pipeline {
 
   post {
     success {
-      archiveArtifacts "${configs.sonar_artifact_folder}/**"
+      archiveArtifacts ".scannerwork/**"
     }
   }
 }
