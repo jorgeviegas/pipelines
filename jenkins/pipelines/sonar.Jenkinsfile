@@ -27,7 +27,7 @@ pipeline {
     // change to: success
     always {
       echo 'Storing artifacts'
-      archieveArtifacts '.sonnar-scanner/*'
+      archieveArtifacts '.scannerwork/*'
     }
   }
 }
