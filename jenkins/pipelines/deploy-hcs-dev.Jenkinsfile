@@ -31,7 +31,7 @@ pipeline {
       }
     }
 
-    stage('Deploy to Consolidation') {
+    stage('Deploy to HCS Dev') {
       steps {   
         deployToConsolidation configs
       }

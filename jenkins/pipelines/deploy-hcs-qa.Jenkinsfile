@@ -13,7 +13,7 @@ pipeline {
         script {
           configs = loadProperties()
           configs.ant_instalation = 'deploy-cons'
-          configs.environment_name = 'dev'
+          configs.environment_name = 'hcs-qa'
         }
       }
     } 
