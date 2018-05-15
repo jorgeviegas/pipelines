@@ -1,33 +1,32 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(Map conf = [:]) {
 
-    // Stop hybris server
-    dir (env.YCONS_PLATFORM_HOME){
-        sh 'chmod +x setantenv.sh'
-        sh '. ./setantenv.sh'
-        sh 'chmod +x hybrisserver.sh'   
-        sh 'chmod +x tomcat/bin/*.sh'
-        sh './hybrisserver.sh stop'
-    }
+    def consPlatform = "${conf.ycons_path}/hybris/bin/platform"
+    def consHybris = "${conf.ycons_path}/hybris"
     
+    try {
+        stopRunningServer consPlatform
+    }
+    catch(exc) {
+        echo 'Error stopping server. Maybe the platform folder is incomplete?'
+    } 
+
     // Remove old version platform binaries
-    dir ("${env.YCONS_PATH}/hybris"){
+    dir (consHybris){
         sh 'rm -rf bin config'
     }
     
     // Replace platform binaries with new version
-    dir (env.HYBRIS_HOME){
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip", dir:"${env.YCONS_PATH}", quiet:true
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Platform.zip", dir:"${env.YCONS_PATH}", quiet:true
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Config.zip", dir:"${env.YCONS_PATH}", quiet:true        
-        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Licence.zip", dir:"${env.YCONS_PATH}", quiet:true        
+    dir (conf.hybris_home){
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-AllExtensions.zip", dir:conf.ycons_path, quiet:true
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Platform.zip", dir:conf.ycons_path, quiet:true
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Config.zip", dir:conf.ycons_path, quiet:true        
+        unzip zipFile:"temp/hybris/hybrisServer/hybrisServer-Licence.zip", dir:conf.ycons_path, quiet:true        
     }
     
     // Copy tomcat configuration and validate config folder
-    dir(env.YCONS_PLATFORM_HOME){
-        sh 'chmod +x setantenv.sh'
-        sh '. ./setantenv.sh'
+    dir(consPlatform){
         sh 'chmod +x apache-ant-1.9.1/bin/ant'
 
         withAnt(installation: 'hybris-cons-ant'){
@@ -36,7 +35,9 @@ def call() {
     }
     
     // Start server with new version
-    dir (env.YCONS_PLATFORM_HOME){
-        sh './hybrisserver.sh start'
+    dir (consPlatform){
+        withEnv(['JENKINS_NODE_COOKIE=dontKill']) {
+            sh './hybrisserver.sh start'
+        }
     }
 }

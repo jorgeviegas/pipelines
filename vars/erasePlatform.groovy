@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-def call() {
-	dir (env.BINARIES_HOME){
+def call(Map conf = [:]) {
+	dir (conf.binaries_home){
 		// remove platform binaries
 		sh 'rm -rf ext-* platform'
 	}
